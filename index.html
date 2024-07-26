@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentors Landing Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.js"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 0;
+      background: #f8f9fa;
+      position: relative;
+    }
+    .floating-image {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .navbar {
+      background: transparent;
+    }
+    .how-it-works, .about-us, .mentors-mentees, .testimonials, .footer {
+      padding: 80px 0;
+    }
+    .mentor-card img, .testimonial-card img {
+      border-radius: 50%;
+    }
+    .testimonial-card {
+      background-color: #f8f9fa;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .map-section {
+      position: relative;
+      text-align: center;
+      padding: 80px 0;
+    }
+    .map-section img {
+      max-width: 100%;
+      height: auto;
+    }
+    .map-pin {
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    footer {
+      background-color: #007bff;
+      color: #fff;
+      padding: 60px 0;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2em;
+      }
+      .navbar {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      template: `
+        <v-app>
+          <v-container>
+            <!-- Navbar -->
+            <v-app-bar app color="transparent" flat>
+              <v-toolbar-title>Mentors</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items class="hidden-sm-and-down">
+                <v-btn text>Find a mentor</v-btn>
+                <v-btn text>Become a mentor</v-btn>
+                <v-btn text>Log in</v-btn>
+                <v-btn outlined>Sign up</v-btn>
+              </v-toolbar-items>
+              <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
+            </v-app-bar>
+            <v-navigation-drawer app v-model="drawer" temporary>
+              <v-list>
+                <v-list-item link>
+                  <v-list-item-title>Find a mentor</v-list-item-title>
+                </v-list-item>
+                <v-list-item link>
+                  <v-list-item-title>Become a mentor</v-list-item-title>
+                </v-list-item>
+                <v-list-item link>
+                  <v-list-item-title>Log in</v-list-item-title>
+                </v-list-item>
+                <v-list-item link>
+                  <v-list-item-title>Sign up</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-navigation-drawer>
+
+            <!-- Hero Section -->
+            <v-row class="hero">
+              <v-col>
+                <h1>Learn and grow with help from world-class mentors</h1>
+                <p>Book and meet over 6,000+ mentors for 1:1 mentorship in our global community.</p>
+                <v-text-field
+                  append-icon="mdi-magnify"
+                  label="Search by company, language or role, expertise, country"
+                  solo
+                ></v-text-field>
+              </v-col>
+              <v-img src="https://via.placeholder.com/100" alt="Floating Image" class="floating-image" style="top: 20px; left: 10%;"></v-img>
+              <v-img src="https://via.placeholder.com/100" alt="Floating Image" class="floating-image" style="top: 100px; right: 15%;"></v-img>
+            </v-row>
+
+            <!-- How It Works Section -->
+            <v-row class="how-it-works">
+              <v-col>
+                <h2>How it works</h2>
+                <v-stepper v-model="e1">
+                  <v-stepper-header>
+                    <v-stepper-step :complete="e1 > 1" step="1">Find a Mentor</v-stepper-step>
+                    <v-divider></v-divider>
+                    <v-stepper-step :complete="e1 > 2" step="2">Sign Up</v-stepper-step>
+                    <v-divider></v-divider>
+                    <v-stepper-step :complete="e1 > 3" step="3">Send Mentor Request</v-stepper-step>
+                    <v-divider></v-divider>
+                    <v-stepper-step step="4">Connect</v-stepper-step>
+                    <v-divider></v-divider>
+                    <v-stepper-step step="5">Schedule Meeting</v-stepper-step>
+                  </v-stepper-header>
+
+                  <v-stepper-items>
+                    <v-stepper-content step="1">
+                      <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+                      <v-btn color="primary" @click="e1 = 2">Continue</v-btn>
+                      <v-btn text @click="e1 = 1">Cancel</v-btn>
+                    </v-stepper-content>
+
+                    <v-stepper-content step="2">
+                      <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+                      <v-btn color="primary" @click="e1 = 3">Continue</v-btn>
+                      <v-btn text @click="e1 = 1">Cancel</v-btn>
+                    </v-stepper-content>
+
+                    <v-stepper-content step="3">
+                      <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+                      <v-btn color="primary" @click="e1 = 4">Continue</v-btn>
+                      <v-btn text @click="e1 = 2">Cancel</v-btn>
+                    </v-stepper-content>
+
+                    <v-stepper-content step="4">
+                      <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+                      <v-btn color="primary" @click="e1 = 5">Continue</v-btn>
+                      <v-btn text @click="e1 = 3">Cancel</v-btn>
+                    </v-stepper-content>
+
+                    <v-stepper-content step="5">
+                      <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+                      <v-btn color="primary">Finish</v-btn>
+                    </v-stepper-content>
+                  </v-stepper-items>
+                </v-stepper>
+              </v-col>
+            </v-row>
+
+            <!-- About Us Section -->
+            <v-row class="about-us">
+              <v-col>
+                <v-img src="https://via.placeholder.com/400x400" alt="About us"></v-img>
+              </v-col>
+              <v-col>
+                <h2>Book 1:1 Sessions</h2>
+                <p>Creative & Professional Digital Mentors!</p>
+                <p>Schedule a session instantly with a mentor and work with them directly on your career goals...</p>
+                <v-btn color="primary">Explore Mentors</v-btn>
+              </v-col>
+            </v-row>
+
+            <!-- World Map Section -->
+            <v-row class="map-section">
+              <v-col>
+                <h2>Expand your skillset, gain insights, and get support from mentors at no cost.</h2>
+                <v-img src="https://via.placeholder.com/1500x500" alt="World map"></v-img>
+                <v-img src="https://via.placeholder.com/100" alt="Map Pin" class="map-pin" style="top: 30%; left: 20%;"></v-img>
+                <v-img src="https://via.placeholder.com/100" alt="Map Pin" class="map-pin" style="top: 50%; left: 50%;"></v-img>
+                <v-img src="https://via.placeholder.com/100" alt="Map Pin" class="map-pin" style="top: 70%; right: 30%;"></v-img>
+              </v-col>
+            </v-row>
+
+            <!-- Mentors & Mentees Section -->
+            <v-row class="mentors-mentees">
+              <v-col>
+                <h2>Our Mentors & Mentees</h2>
+                <p>We are a community of 50,000+ ambitious professionals, going further each day.</p>
+                <v-row>
+                  <v-col v-for="(mentor, index) in mentors" :key="index" class="mentor-card">
+                    <v-img :src="mentor.image" alt="Mentor" width="100" height="100"></v-img>
+                    <h3>{{ mentor.name }}</h3>
+                    <p>{{ mentor.title }}</p>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+
+            <!-- Testimonials Section -->
+            <v-row class="testimonials">
+              <v-col>
+                <h2>Wins from all around the globe</h2>
+                <v-row>
+                  <v-col v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-card" cols="12" md="4">
+                    <v-img :src="testimonial.image" alt="Testimonial" width="100" height="100"></v-img>
+                    <p>{{ testimonial.feedback }}</p>
+                    <p><strong>{{ testimonial.name }}</strong></p>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+
+            <!-- Footer -->
+            <footer>
+              <h2>Subscribe to our Newsletter</h2>
+              <v-text-field label="Enter your email address" solo></v-text-field>
+              <v-btn color="primary">Sign Up Now</v-btn>
+              <div class="footer-links">
+                <a href="#">Contact</a>
+                <a href="#">About</a>
+                <a href="#">Terms of Service</a>
+              </div>
+            </footer>
+          </v-container>
+        </v-app>
+      `,
+      data() {
+        return {
+          drawer: false,
+          e1: 1,
+          mentors: [
+            { image: 'https://via.placeholder.com/100', name: 'John Doe', title: 'Senior Developer' },
+            { image: 'https://via.placeholder.com/100', name: 'Jane Smith', title: 'UI/UX Designer' },
+            { image: 'https://via.placeholder.com/100', name: 'Bob Johnson', title: 'Data Scientist' }
+          ],
+          testimonials: [
+            { image: 'https://via.placeholder.com/100', feedback: 'Great experience!', name: 'Alice' },
+            { image: 'https://via.placeholder.com/100', feedback: 'Learned a lot!', name: 'Bob' },
+            { image: 'https://via.placeholder.com/100', feedback: 'Highly recommend!', name: 'Charlie' }
+          ]
+        };
+      }
+    });
+  </script>
+</body>
+</html>
