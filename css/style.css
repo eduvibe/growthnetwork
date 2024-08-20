@@ -68,11 +68,7 @@ body {
   height: 80px;
   z-index: 2;
 }
-.navbar {
-  background: #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: #007bff;
-}
+
 .how-it-works, .about-us, .mentors-mentees, .testimonials, .footer {
   padding: 80px 0;
 }
