@@ -8,65 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.js"></script>
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-    }
-    .hero {
-      text-align: center;
-      padding: 80px 0;
-      background: #f8f9fa;
-      position: relative;
-    }
-    .floating-image {
-      position: absolute;
-      border-radius: 50%;
-    }
-    .navbar {
-      background: transparent;
-    }
-    .how-it-works, .about-us, .mentors-mentees, .testimonials, .footer {
-      padding: 80px 0;
-    }
-    .mentor-card img, .testimonial-card img {
-      border-radius: 50%;
-    }
-    .testimonial-card {
-      background-color: #f8f9fa;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-    .map-section {
-      position: relative;
-      text-align: center;
-      padding: 80px 0;
-    }
-    .map-section img {
-      max-width: 100%;
-      height: auto;
-    }
-    .map-pin {
-      position: absolute;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-    }
-    footer {
-      background-color: #007bff;
-      color: #fff;
-      padding: 60px 0;
-      text-align: center;
-    }
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2em;
-      }
-      .navbar {
-        flex-wrap: wrap;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
   <div id="app"></div>
@@ -75,11 +18,27 @@
     new Vue({
       el: '#app',
       vuetify: new Vuetify(),
+      data() {
+        return {
+          drawer: false,
+          e1: 1,
+          mentors: [
+            { image: '/images/mentor1.jpg', name: 'John Doe', title: 'Senior Developer' },
+            { image: '/images/mentor2.jpg', name: 'Jane Smith', title: 'UI/UX Designer' },
+            { image: '/images/mentor3.jpg', name: 'Bob Johnson', title: 'Data Scientist' }
+          ],
+          testimonials: [
+            { image: '/images/testimonial1.jpg', feedback: 'Great experience!', name: 'Alice' },
+            { image: '/images/testimonial2.jpg', feedback: 'Learned a lot!', name: 'Bob' },
+            { image: '/images/testimonial3.jpg', feedback: 'Highly recommend!', name: 'Charlie' }
+          ]
+        };
+      },
       template: `
         <v-app>
           <v-container>
             <!-- Navbar -->
-            <v-app-bar app color="transparent" flat>
+            <v-app-bar app class="navbar" color="black" dark>
               <v-toolbar-title>Growth</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-items class="hidden-sm-and-down">
@@ -109,17 +68,19 @@
 
             <!-- Hero Section -->
             <v-row class="hero">
-              <v-col>
+              <v-col class="hero-content">
                 <h1>Learn and grow with help from world-class mentors</h1>
                 <p>Book and meet over 6,000+ mentors for 1:1 mentorship in our global community.</p>
                 <v-text-field
                   append-icon="mdi-magnify"
                   label="Search by company, language or role, expertise, country"
                   solo
+                  class="white--text"
+                  hide-details
                 ></v-text-field>
               </v-col>
-              <v-img src="https://via.placeholder.com/100" alt="Floating Image" class="floating-image" style="top: 20px; left: 10%;"></v-img>
-              <v-img src="https://via.placeholder.com/100" alt="Floating Image" class="floating-image" style="top: 100px; right: 15%;"></v-img>
+              <v-img src="/images/prof1.png" alt="Floating Image" class="floating-image" style="top: 10%; left: 10%;"></v-img>
+              <v-img src="/images/prof5.png" alt="Floating Image" class="floating-image" style="top: 30%; right: 10%;"></v-img>
             </v-row>
 
             <!-- How It Works Section -->
@@ -176,7 +137,7 @@
             <!-- About Us Section -->
             <v-row class="about-us">
               <v-col>
-                <v-img src="https://via.placeholder.com/400x400" alt="About us"></v-img>
+                <v-img src="/images/about-us.jpg" alt="About us"></v-img>
               </v-col>
               <v-col>
                 <h2>Book 1:1 Sessions</h2>
@@ -190,11 +151,13 @@
             <v-row class="map-section">
               <v-col>
                 <h2>Expand your skillset, gain insights, and get support from mentors at no cost.</h2>
-                <v-img src="https://via.placeholder.com/1500x500" alt="World map"></v-img>
-                <v-img src="https://via.placeholder.com/100" alt="Map Pin" class="map-pin" style="top: 30%; left: 20%;"></v-img>
-                <v-img src="https://via.placeholder.com/100" alt="Map Pin" class="map-pin" style="top: 50%; left: 50%;"></v-img>
-                <v-img src="https://via.placeholder.com/100" alt="Map Pin" class="map-pin" style="top: 70%; right: 30%;"></v-img>
+                <v-img src="/images/back01.png" alt="World map"></v-img>
+                <v-img src="/images/map-pin2.png" alt="Map Pin" class="map-pin" style="top: 20%; left: 15%;"></v-img>
+                <v-img src="/images/map-pin3.png" alt="Map Pin" class="map-pin" style="top: 50%; left: 50%;"></v-img>
+                <v-img src="/images/map-pin4.png" alt="Map Pin" class="map-pin" style="top: 70%; left: 80%;"></v-img>
               </v-col>
+              <v-img src="/images/prof1.png" alt="Floating Image" class="floating-image" style="top: 20%; left: 10%;"></v-img>
+              <v-img src="/images/prof5.png" alt="Floating Image" class="floating-image" style="top: 50%; right: 10%;"></v-img>
             </v-row>
 
             <!-- Mentors & Mentees Section -->
@@ -239,23 +202,7 @@
             </footer>
           </v-container>
         </v-app>
-      `,
-      data() {
-        return {
-          drawer: false,
-          e1: 1,
-          mentors: [
-            { image: 'https://via.placeholder.com/100', name: 'John Doe', title: 'Senior Developer' },
-            { image: 'https://via.placeholder.com/100', name: 'Jane Smith', title: 'UI/UX Designer' },
-            { image: 'https://via.placeholder.com/100', name: 'Bob Johnson', title: 'Data Scientist' }
-          ],
-          testimonials: [
-            { image: 'https://via.placeholder.com/100', feedback: 'Great experience!', name: 'Alice' },
-            { image: 'https://via.placeholder.com/100', feedback: 'Learned a lot!', name: 'Bob' },
-            { image: 'https://via.placeholder.com/100', feedback: 'Highly recommend!', name: 'Charlie' }
-          ]
-        };
-      }
+      `
     });
   </script>
 </body>
