@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Growth</title>
+  <title>ThriveLink</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
@@ -37,50 +38,77 @@
       template: `
         <v-app>
           <v-container>
-            <!-- Navbar -->
-            <v-app-bar app class="navbar" color="black" dark>
-              <v-toolbar-title>Growth</v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-toolbar-items class="hidden-sm-and-down">
-                <v-btn text>Find a mentor</v-btn>
-                <v-btn text>Become a mentor</v-btn>
-                <v-btn text>Log in</v-btn>
-                <v-btn outlined>Sign up</v-btn>
-              </v-toolbar-items>
-              <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
-            </v-app-bar>
-            <v-navigation-drawer app v-model="drawer" temporary>
-              <v-list>
-                <v-list-item link>
-                  <v-list-item-title>Find a mentor</v-list-item-title>
-                </v-list-item>
-                <v-list-item link>
-                  <v-list-item-title>Become a mentor</v-list-item-title>
-                </v-list-item>
-                <v-list-item link>
-                  <v-list-item-title>Log in</v-list-item-title>
-                </v-list-item>
-                <v-list-item link>
-                  <v-list-item-title>Sign up</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-navigation-drawer>
+          <!-- Navbar -->
+<v-app-bar app class="navbar" color="black" dark>
+  <!-- Logo -->
+  <v-app-bar-nav-icon>
+    <v-img src="/images/logo.png" alt="ThriveLink Logo" max-height="50" contain></v-img>
+  </v-app-bar-nav-icon>
+  <v-toolbar-title>ThriveLink</v-toolbar-title>
+  <v-spacer></v-spacer>
+  <v-toolbar-items class="hidden-sm-and-down">
+    <v-btn text>Find a mentor</v-btn>
+    <v-btn text>Become a mentor</v-btn>
+    <v-btn text>Log in</v-btn>
+    <v-btn outlined>Sign up</v-btn>
+  </v-toolbar-items>
+  <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
+    <v-icon>mdi-menu</v-icon>
+  </v-app-bar-nav-icon>
+</v-app-bar>
 
-            <!-- Hero Section -->
+<!-- Navigation Drawer -->
+<v-navigation-drawer app v-model="drawer" temporary>
+  <v-list>
+    <v-list-item link>
+      <v-list-item-title>Find a mentor</v-list-item-title>
+    </v-list-item>
+    <v-list-item link>
+      <v-list-item-title>Become a mentor</v-list-item-title>
+    </v-list-item>
+    <v-list-item link>
+      <v-list-item-title>Log in</v-list-item-title>
+    </v-list-item>
+    <v-list-item link>
+      <v-list-item-title>Sign up</v-list-item-title>
+    </v-list-item>
+  </v-list>
+</v-navigation-drawer>
+
+
+        <!-- Hero Section -->
             <v-row class="hero">
-              <v-col class="hero-content">
-                <h1>Learn and grow with help from world-class mentors</h1>
-                <p>Book and meet over 6,000+ mentors for 1:1 mentorship in our global community.</p>
-                <v-text-field
-                  append-icon="mdi-magnify"
-                  label="Search by company, language or role, expertise, country"
-                  solo
-                  class="white--text"
-                  hide-details
-                ></v-text-field>
-              </v-col>
+              <v-col class="hero-content d-flex flex-column align-center justify-center">
+  <h1>Learn and grow with help from world-class mentors</h1>
+  <p>Book and meet over 6,000+ mentors for 1:1 mentorship in our global community.</p>
+  <v-text-field
+    append-icon="mdi-magnify"
+    label="Search by company, language or role, expertise, country"
+    solo
+    class="white--text searchbar"
+    hide-details
+  ></v-text-field>
+</v-col>
+              <v-img src="/images/logo.png" alt="Floating Image" class="floating-image" style="top: 70%; left: 10%;"></v-img>
+
               <v-img src="/images/prof1.png" alt="Floating Image" class="floating-image" style="top: 10%; left: 10%;"></v-img>
               <v-img src="/images/prof5.png" alt="Floating Image" class="floating-image" style="top: 30%; right: 10%;"></v-img>
+              <v-img src="/images/prof4.png" alt="Floating Image" class="floating-image" style="top: 70%; left: 70%;"></v-img>
+            </v-row>
+
+
+<!-- World Map Section -->
+            <v-row class="map-section">
+              <v-col>
+                <h2>Expand your skillset, gain insights, and get support from mentors at no cost.</h2>
+                <v-img src="/images/back01.png" alt="World map"></v-img>
+                <v-img src="/images/map-pin2.png" alt="Map Pin" class="map-pin" style="top: 20%; left: 15%;"></v-img>
+                <v-img src="/images/map-pin3.png" alt="Map Pin" class="map-pin" style="top: 50%; left: 50%;"></v-img>
+                <v-img src="/images/map-pin4.png" alt="Map Pin" class="map-pin" style="top: 70%; left: 80%;"></v-img>
+              </v-col>
+              <v-img src="/images/prof1.png" alt="Floating Image" class="floating-image" style="top: 20%; left: 10%;"></v-img>
+              <v-img src="/images/prof5.png" alt="Floating Image" class="floating-image" style="top: 50%; right: 10%;"></v-img>
+              <v-img src="/images/logo.png" alt="Floating Image" class="floating-image" style="top: 30%; left: 45%;"></v-img>
             </v-row>
 
             <!-- How It Works Section -->
@@ -147,18 +175,7 @@
               </v-col>
             </v-row>
 
-            <!-- World Map Section -->
-            <v-row class="map-section">
-              <v-col>
-                <h2>Expand your skillset, gain insights, and get support from mentors at no cost.</h2>
-                <v-img src="/images/back01.png" alt="World map"></v-img>
-                <v-img src="/images/map-pin2.png" alt="Map Pin" class="map-pin" style="top: 20%; left: 15%;"></v-img>
-                <v-img src="/images/map-pin3.png" alt="Map Pin" class="map-pin" style="top: 50%; left: 50%;"></v-img>
-                <v-img src="/images/map-pin4.png" alt="Map Pin" class="map-pin" style="top: 70%; left: 80%;"></v-img>
-              </v-col>
-              <v-img src="/images/prof1.png" alt="Floating Image" class="floating-image" style="top: 20%; left: 10%;"></v-img>
-              <v-img src="/images/prof5.png" alt="Floating Image" class="floating-image" style="top: 50%; right: 10%;"></v-img>
-            </v-row>
+            
 
             <!-- Mentors & Mentees Section -->
             <v-row class="mentors-mentees">
@@ -189,17 +206,42 @@
               </v-col>
             </v-row>
 
-            <!-- Footer -->
-            <footer>
-              <h2>Subscribe to our Newsletter</h2>
-              <v-text-field label="Enter your email address" solo></v-text-field>
-              <v-btn color="primary">Sign Up Now</v-btn>
-              <div class="footer-links">
-                <a href="#">Contact</a>
-                <a href="#">About</a>
-                <a href="#">Terms of Service</a>
-              </div>
-            </footer>
+           <!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="newsletter">
+      <h2>Subscribe to our Newsletter</h2>
+      <div class="newsletter-form">
+        <input 
+          type="email" 
+          placeholder="Enter your email address" 
+          class="newsletter-input"
+        />
+        <button class="newsletter-btn">Sign Up Now</button>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Contact</a>
+      <a href="#">About</a>
+      <a href="#">Terms of Service</a>
+    </div>
+    <div class="social-media">
+      <a href="#" class="social-icon" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="social-icon" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="social-icon" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="#" class="social-icon" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
           </v-container>
         </v-app>
       `
