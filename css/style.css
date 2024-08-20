@@ -1,3 +1,10 @@
+:root{
+    --primary: #5c0153;
+    --btncolor: #e29c01;
+    --dangercolor: #bb1309;
+    --blue:#1460b6;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
