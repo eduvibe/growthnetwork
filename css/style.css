@@ -220,10 +220,16 @@ body {
 
 /* Media queries for small screens */
 @media (max-width: 600px) {
+  /* Navbar Logo */
+.v-app-bar-nav-icon img {
+  max-height: 30px!important;
+  max-width:30px ; 
+  object-fit: contain;
+}
   .image-logo {
     top: 40%!important; 
     left: 5%;
-    width: 30px;  /* Adjust size */
+    width: 30px;  
     height: 30px;
   }
 
@@ -244,6 +250,27 @@ body {
   .image-prof4 {
     top: 80%!important; 
     right: 15%;
+    width: 40px;  /* Adjust size */
+    height: 40px;
+  }
+
+  .image-prof01 {
+    top: 50%!important; 
+    right: 15%;
+    width: 40px;  /* Adjust size */
+    height: 40px;
+  }
+
+  .image-prof02 {
+    top: 60%!important; 
+    right: 10%;
+    width: 40px;  /* Adjust size */
+    height: 40px;
+  }
+
+  .image-prof03 {
+    top: 60%!important; 
+    right: 5%;
     width: 40px;  /* Adjust size */
     height: 40px;
   }
