@@ -173,6 +173,10 @@ body {
     text-decoration: underline;
   }
   
+  .counseling{
+    width: 400px;
+    border-radius: 10px!important;
+  }
   .social-media {
     margin-top: 20px;
   }
