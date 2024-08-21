@@ -25,17 +25,23 @@
           e1: 1,
           mentors: [
             { image: '/images/prof2.png', name: 'John Doe', title: 'Senior Developer' },
-            { image: '/images/prof3.png', name: 'Jane Smith', title: 'UI/UX Designer' },
-            { image: '/images/prof3.png', name: 'Jane Smith', title: 'UI/UX Designer' },
-            { image: '/images/prof3.png', name: 'Jane Smith', title: 'UI/UX Designer' },
-            { image: '/images/prof3.png', name: 'Jane Smith', title: 'UI/UX Designer' },
-            { image: '/images/prof5.png', name: 'Bob Johnson', title: 'Data Scientist' }
+            { image: '/images/ment1.jpg', name: 'Jane Smith', title: 'UI/UX Designer' },
+            { image: '/images/ment2.jpg', name: 'Jane Smith', title: 'UI/UX Designer' },
+            { image: '/images/ment3.jpg', name: 'Jane Smith', title: 'UI/UX Designer' },
+            { image: '/images/ment5.jpg', name: 'Jane Smith', title: 'UI/UX Designer' },
+            { image: '/images/ment4.jpeg', name: 'Bob Johnson', title: 'Data Scientist' }
           ],
           testimonials: [
-            { image: '/images/testimonial1.jpg', feedback: 'Great experience!', name: 'Alice' },
-            { image: '/images/testimonial2.jpg', feedback: 'Learned a lot!', name: 'Bob' },
-            { image: '/images/testimonial3.jpg', feedback: 'Highly recommend!', name: 'Charlie' }
-          ]
+  { image: '/images/test1.png', feedback: 'Great experience! Highly recommend this service.', name: 'Alice' },
+  { image: '/images/test2.png', feedback: 'I learned so much from this. The best course I’ve taken!', name: 'Bob' },
+  { image: '/images/test3.jpg', feedback: 'An amazing journey. The support was fantastic.', name: 'Charlie' },
+  { image: '/images/test4.webp', feedback: 'Exceeded my expectations in every way. Will be back!', name: 'Diana' },
+  { image: '/images/test5.png', feedback: 'Exceptional quality and service. I am very satisfied.', name: 'Edward' },
+  { image: '/images/test6.jpg', feedback: 'Very insightful and practical. Worth every penny.', name: 'Fiona' },
+  { image: '/images/test7.png', feedback: 'A transformative experience. Great value for the investment.', name: 'George' },
+  { image: '/images/test8.jpg', feedback: 'Top-notch! Professional and effective learning environment.', name: 'Hannah' }
+]
+
         };
       },
       template: `
@@ -199,17 +205,17 @@
 
             <!-- Testimonials Section -->
             <v-row class="testimonials">
-              <v-col>
-                <h2>Wins from all around the globe</h2>
-                <v-row>
-                  <v-col v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-card" cols="12" md="4">
-                    <v-img :src="testimonial.image" alt="Testimonial" width="100" height="100"></v-img>
-                    <p>{{ testimonial.feedback }}</p>
-                    <p><strong>{{ testimonial.name }}</strong></p>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
+    <v-col>
+      <h2>Wins from all around the globe</h2>
+      <v-row>
+        <v-col v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-card" cols="12" md="3">
+          <v-img :src="testimonial.image" class="testimg" alt="Testimonial"></v-img>
+          <p>{{ testimonial.feedback }}</p>
+          <p><strong>{{ testimonial.name }}</strong></p>
+        </v-col>
+      </v-row>
+    </v-col>
+  </v-row>
 
            <!-- Footer -->
 <footer class="footer">
