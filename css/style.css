@@ -215,3 +215,37 @@ body {
     flex-wrap: wrap;
   }
 }
+
+
+
+/* Media queries for small screens */
+@media (max-width: 600px) {
+  .image-logo {
+    top: 40%!important; 
+    left: 5%;
+    width: 30px;  /* Adjust size */
+    height: 30px;
+  }
+
+  .image-prof1 {
+    top: 40%!important; 
+    left: 15%;
+    width: 30px;  /* Adjust size */
+    height: 30px;
+  }
+
+  .image-prof5 {
+    top: 40%!important; 
+    right: 15%;
+    width: 30px;  /* Adjust size */
+    height: 30px;
+  }
+
+  .image-prof4 {
+    top: 50%!important; 
+    right: 5%;
+    width: 40px;  /* Adjust size */
+    height: 40px;
+  }
+}
+
