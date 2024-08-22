@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThriveLink | Users</title>
+  <!-- Vuetify CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.7/dist/vuetify.min.css" rel="stylesheet">
+  <!-- Material Design Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <!-- Vuetify JS -->
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.7/dist/vuetify.js"></script>
+  <!-- Vue Router -->
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Navigation Bar -->
+    <v-app>
+      <v-app-bar app color="black" dark>
+        <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
+          <v-icon>mdi-menu</v-icon>
+        </v-app-bar-nav-icon>
+        <v-img src="/images/logo.png" alt="ThriveLink Logo" max-height="50" contain class="mr-4"></v-img>
+        <v-toolbar-title>ThriveLink</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <v-btn text to="/">Home</v-btn>
+          <v-btn text to="/blog">Blog</v-btn>
+          <v-btn outlined v-if="!currentUser" to="/login">Login</v-btn>
+          <v-btn outlined v-if="!currentUser" to="/register">Register</v-btn>
+          <v-btn text v-if="currentUser" @click="logout">Logout</v-btn>
+        </v-toolbar-items>
+      </v-app-bar>
+
+      <!-- Navigation Drawer -->
+      <v-navigation-drawer v-model="drawer" app temporary>
+        <v-list>
+          <v-list-item link to="/">
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+          <v-list-item link to="/blog">
+            <v-list-item-title>Blog</v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="currentUser" @click="logout">
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="!currentUser" link to="/login">
+            <v-list-item-title>Login</v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="!currentUser" link to="/register">
+            <v-list-item-title>Register</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <!-- Main Content -->
+      <v-main>
+        <router-view></router-view>
+      </v-main>
+
+      <!-- Footer -->
+      <v-footer app color="black" dark>
+        <v-col class="text-center" cols="12">
+          © 2024 ThriveLink - Mentor-Mentee Web App
+        </v-col>
+      </v-footer>
+    </v-app>
+  </div>
+
+  <script>
+    // Simulated User Data
+    let currentUser = null; // Set to an object with user data if logged in
+
+    // Authentication Guard for Routes
+    const requireAuth = (to, from, next) => {
+      if (currentUser) {
+        next();
+      } else {
+        next('/login');
+      }
+    };
+
+    // Define Vue Components
+    const HomePage = {
+      template: `
+        <v-container>
+          <v-row>
+            <v-col cols="12" md="6" offset-md="3">
+              <v-card>
+                <v-img src="https://via.placeholder.com/800x400" class="white--text" height="200px">
+                  <v-card-title>Welcome to ThriveLink</v-card-title>
+                </v-img>
+                <v-card-subtitle>Connect with mentors and mentees to advance your career.</v-card-subtitle>
+                <v-card-actions>
+                  <v-btn color="primary" to="/login">Login</v-btn>
+                  <v-btn color="primary" to="/register">Register</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      `
+    };
+
+    const LoginPage = {
+      template: `
+        <v-container>
+          <v-row>
+            <v-col cols="12" md="6" offset-md="3">
+              <v-card>
+                <v-card-title>Login</v-card-title>
+                <v-card-text>
+                  <v-form>
+                    <v-text-field label="Email" prepend-icon="mdi-email" v-model="email"></v-text-field>
+                    <v-text-field label="Password" prepend-icon="mdi-lock" v-model="password" type="password"></v-text-field>
+                    <v-btn color="primary" @click="login">Login</v-btn>
+                  </v-form>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      `,
+      data() {
+        return {
+          email: '',
+          password: ''
+        };
+      },
+      methods: {
+        login() {
+          if (this.email && this.password) {
+            currentUser = { role: 'mentee' }; // Change this to 'mentor' if needed
+            this.$router.push(currentUser.role === 'mentor' ? '/mentor-dashboard' : '/dashboard');
+          } else {
+            alert('Please fill in both fields.');
+          }
+        }
+      }
+    };
+
+    const RegistrationPage = {
+      template: `
+        <v-container>
+          <v-row>
+            <v-col cols="12" md="6" offset-md="3">
+              <v-card>
+                <v-card-title>Register</v-card-title>
+                <v-card-text>
+                  <v-form>
+                    <v-text-field label="Name" v-model="name"></v-text-field>
+                    <v-text-field label="Email" prepend-icon="mdi-email" v-model="email"></v-text-field>
+                    <v-text-field label="Password" prepend-icon="mdi-lock" v-model="password" type="password"></v-text-field>
+                    <v-select label="Role" :items="['mentor', 'mentee']" v-model="role"></v-select>
+                    <v-btn color="primary" @click="register">Register</v-btn>
+                  </v-form>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      `,
+      data() {
+        return {
+          name: '',
+          email: '',
+          password: '',
+          role: ''
+        };
+      },
+      methods: {
+        register() {
+          if (this.name && this.email && this.password && this.role) {
+            currentUser = { name: this.name, role: this.role };
+            this.$router.push('/login');
+          } else {
+            alert('Please fill in all fields.');
+          }
+        }
+      }
+    };
+
+    const DashboardMentee = {
+      template: `
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>Welcome, Mentee!</v-card-title>
+                <v-card-subtitle>Manage your tasks, messages, and resources here.</v-card-subtitle>
+                <v-card-text>
+                  <v-btn color="primary" to="/search-mentors">Search for Mentors</v-btn>
+                  <v-btn color="primary" to="/tasks">Tasks</v-btn>
+                  <v-btn color="primary" to="/messages">Messages</v-btn>
+                  <v-btn color="primary" to="/resources">Resources</v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      `
+    };
+
+    const DashboardMentor = {
+      template: `
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>Welcome, Mentor!</v-card-title>
+                <v-card-subtitle>Manage your mentees, tasks, and meetings here.</v-card-subtitle>
+                <v-card-text>
+                  <v-btn color="primary" to="/mentee-profiles">Mentee Profiles</v-btn>
+                  <v-btn color="primary" to="/mentor-requests">Mentor Requests</v-btn>
+                  <v-btn color="primary" to="/tasks">Manage Tasks</v-btn>
+                  <v-btn color="primary" to="/scheduler">Schedule Meetings</v-btn>
+                  <v-btn color="primary" to="/messages">Messages</v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      `
+    };
+
+    const BlogPage = {
+      template: `
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>Blog</v-card-title>
+                <v-card-subtitle>Read our latest articles and updates.</v-card-subtitle>
+                <v-card-text>
+                  <p>This is a placeholder for blog content.</p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      `
+    };
+
+    // Configure Vue Router
+    const router = new VueRouter({
+      routes: [
+        { path: '/', component: HomePage },
+        { path: '/login', component: LoginPage },
+        { path: '/register', component: RegistrationPage },
+        { path: '/dashboard', component: DashboardMentee, beforeEnter: requireAuth },
+        { path: '/mentor-dashboard', component: DashboardMentor, beforeEnter: requireAuth },
+        { path: '/blog', component: BlogPage }
+      ]
+    });
+
+    // Create Vue Instance
+    new Vue({
+      vuetify: new Vuetify(),
+      router,
+      el: '#app',
+      data() {
+        return {
+          drawer: false,
+          currentUser
+        };
+      },
+      methods: {
+        logout() {
+          currentUser = null;
+          this.$router.push('/');
+        }
+      },
+      watch: {
+        currentUser(value) {
+          if (value) {
+            this.$router.push(value.role === 'mentor' ? '/mentor-dashboard' : '/dashboard');
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
