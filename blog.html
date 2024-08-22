@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Page</title>
+  <!-- Vuetify CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.4/dist/vuetify.min.css" rel="stylesheet">
+  <!-- Vue CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <!-- Vuetify JS -->
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.4/dist/vuetify.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .blog-header {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+    .blog-subheader {
+      color: #757575;
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+    .blog-content {
+      display: flex;
+      gap: 20px;
+    }
+    .blog-sidebar {
+      flex: 1;
+      padding-right: 20px;
+    }
+    .blog-main {
+      flex: 2;
+    }
+    .blog-card {
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    .newsletter {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <v-app>
+      <v-container>
+        <!-- Blog Header -->
+        <div class="blog-header">Insights from our team</div>
+        <div class="blog-subheader">Powerful Trading Tools and Features for Experienced Investors</div>
+
+        <v-row>
+          <!-- Sidebar -->
+          <v-col cols="12" md="3">
+            <div class="blog-sidebar">
+              <h4>Blog Topics</h4>
+              <v-list>
+                <v-list-item>Company</v-list-item>
+                <v-list-item>Design</v-list-item>
+                <v-list-item>Technology</v-list-item>
+                <v-list-item>Crypto</v-list-item>
+                <v-list-item>Artificial Intelligence</v-list-item>
+                <v-list-item>Work</v-list-item>
+              </v-list>
+
+              <h4>Guide and Tools</h4>
+              <v-list>
+                <v-list-item>Guidelines</v-list-item>
+                <v-list-item>Mentorship</v-list-item>
+                <v-list-item>Tutorial</v-list-item>
+                <v-list-item>Training</v-list-item>
+                <v-list-item>Career</v-list-item>
+                <v-list-item>Self Care</v-list-item>
+              </v-list>
+            </div>
+          </v-col>
+
+          <!-- Main Content -->
+          <v-col cols="12" md="9">
+            <div class="blog-main">
+              <v-row>
+                <!-- Trending Topics -->
+                <v-col cols="12">
+                  <v-chip-group active-class="white--text" row>
+                    <v-chip color="primary">Design Thinking</v-chip>
+                    <v-chip>Technology</v-chip>
+                    <v-chip>Web3</v-chip>
+                    <v-chip>Programming</v-chip>
+                    <v-chip>AI</v-chip>
+                  </v-chip-group>
+                </v-col>
+                <!-- Blog Post 1 -->
+                <v-col cols="12">
+                  <div class="blog-card">
+                    <h4>Powerful Trading Tools and Features for Experienced Investors</h4>
+                    <p>
+                      I'm always trying to think of new and interesting business ideas. I generally try to come up
+                      with ideas by thinking of what I would want to do or see in the world...
+                    </p>
+                    <div>
+                      <v-chip color="grey lighten-2">Tools</v-chip>
+                      <v-icon class="ml-2 mr-1" color="primary">mdi-account</v-icon> By Mark Tuchel
+                      <v-icon class="ml-2 mr-1" color="primary">mdi-clock</v-icon> 7 min read
+                    </div>
+                  </div>
+                </v-col>
+
+                <!-- Blog Post 2 -->
+                <v-col cols="12">
+                  <div class="blog-card">
+                    <h4>We are implementing AI and Technology</h4>
+                    <p>
+                      I'm always trying to think of new and interesting business ideas. I generally try to come up
+                      with ideas by thinking of what I would want to do or see in the world...
+                    </p>
+                    <div>
+                      <v-chip color="grey lighten-2">AI</v-chip>
+                      <v-icon class="ml-2 mr-1" color="primary">mdi-account</v-icon> By Harry Oland
+                      <v-icon class="ml-2 mr-1" color="primary">mdi-clock</v-icon> 4 min read
+                    </div>
+                  </div>
+                </v-col>
+
+                <!-- Newsletter Section -->
+                <v-col cols="12">
+                  <div class="newsletter">
+                    <h3>Stay up to date</h3>
+                    <p>Join Our Newsletter</p>
+                    <v-text-field label="Enter your email" prepend-icon="mdi-email"></v-text-field>
+                    <v-btn color="primary">Submit</v-btn>
+                    <p><small>*You can unsubscribe anytime</small></p>
+                  </div>
+                </v-col>
+              </v-row>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-app>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+    })
+  </script>
+</body>
+</html>
