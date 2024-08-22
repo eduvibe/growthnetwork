@@ -10,7 +10,6 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.js"></script>
   <link rel="stylesheet" href="/css/style.css">
-
 </head>
 <body>
   <div id="app"></div>
@@ -32,83 +31,82 @@
             { image: '/images/ment4.jpeg', name: 'Bob Johnson', title: 'Data Scientist' }
           ],
           testimonials: [
-  { image: '/images/test1.png', feedback: 'Great experience! Highly recommend this service.', name: 'Alice' },
-  { image: '/images/test2.png', feedback: 'I learned so much from this. The best course I’ve taken!', name: 'Bob' },
-  { image: '/images/test3.jpg', feedback: 'An amazing journey. The support was fantastic.', name: 'Charlie' },
-  { image: '/images/test4.webp', feedback: 'Exceeded my expectations in every way. Will be back!', name: 'Diana' },
-  { image: '/images/test5.png', feedback: 'Exceptional quality and service. I am very satisfied.', name: 'Edward' },
-  { image: '/images/test6.jpg', feedback: 'Very insightful and practical. Worth every penny.', name: 'Fiona' },
-  { image: '/images/test7.png', feedback: 'A transformative experience. Great value for the investment.', name: 'George' },
-  { image: '/images/test8.jpg', feedback: 'Top-notch! Professional and effective learning environment.', name: 'Hannah' }
-]
-
+            { image: '/images/test1.png', feedback: 'Great experience! Highly recommend this service.', name: 'Alice' },
+            { image: '/images/test2.png', feedback: 'I learned so much from this. The best course I’ve taken!', name: 'Bob' },
+            { image: '/images/test3.jpg', feedback: 'An amazing journey. The support was fantastic.', name: 'Charlie' },
+            { image: '/images/test4.webp', feedback: 'Exceeded my expectations in every way. Will be back!', name: 'Diana' },
+            { image: '/images/test5.png', feedback: 'Exceptional quality and service. I am very satisfied.', name: 'Edward' },
+            { image: '/images/test6.jpg', feedback: 'Very insightful and practical. Worth every penny.', name: 'Fiona' },
+            { image: '/images/test7.png', feedback: 'A transformative experience. Great value for the investment.', name: 'George' },
+            { image: '/images/test8.jpg', feedback: 'Top-notch! Professional and effective learning environment.', name: 'Hannah' }
+          ]
         };
+      },
+      methods: {
+        navigateTo(url) {
+          window.location.href = url; // Navigate to external HTML file
+        }
       },
       template: `
         <v-app>
           <v-container>
-          <!-- Navbar -->
-<v-app-bar app class="navbar" color="black" dark>
-  <!-- Logo -->
-  <v-app-bar-nav-icon>
-    <v-img src="/images/logo.png" alt="ThriveLink Logo" max-height="50" contain></v-img>
-  </v-app-bar-nav-icon>
-  <v-toolbar-title>ThriveLink</v-toolbar-title>
-  <v-spacer></v-spacer>
-  <v-toolbar-items class="hidden-sm-and-down">
-    <v-btn text>Find a mentor</v-btn>
-    <v-btn text>Become a mentor</v-btn>
-    <v-btn text>Log in</v-btn>
-    <v-btn outlined>Sign up</v-btn>
-  </v-toolbar-items>
-  <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
-    <v-icon>mdi-menu</v-icon>
-  </v-app-bar-nav-icon>
-</v-app-bar>
+            <!-- Navbar -->
+            <v-app-bar app class="navbar" color="black" dark>
+              <!-- Logo -->
+              <v-app-bar-nav-icon>
+                <v-img src="/images/logo.png" alt="ThriveLink Logo" max-height="50" contain></v-img>
+              </v-app-bar-nav-icon>
+              <v-toolbar-title>ThriveLink</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items class="hidden-sm-and-down">
+                <v-btn text>Find a mentor</v-btn>
+                <v-btn text>Become a mentor</v-btn>
+                <v-btn text @click="navigateTo('users.html')">Log in</v-btn>
+                <v-btn outlined @click="navigateTo('users.html')">Sign up</v-btn>
+              </v-toolbar-items>
+              <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
+                <v-icon>mdi-menu</v-icon>
+              </v-app-bar-nav-icon>
+            </v-app-bar>
 
-<!-- Navigation Drawer -->
-<v-navigation-drawer app v-model="drawer" temporary>
-  <v-list>
-    <v-list-item link>
-      <v-list-item-title>Find a mentor</v-list-item-title>
-    </v-list-item>
-    <v-list-item link>
-      <v-list-item-title>Become a mentor</v-list-item-title>
-    </v-list-item>
-    <v-list-item link>
-      <v-list-item-title>Log in</v-list-item-title>
-    </v-list-item>
-    <v-list-item link>
-      <v-list-item-title>Sign up</v-list-item-title>
-    </v-list-item>
-  </v-list>
-</v-navigation-drawer>
+            <!-- Navigation Drawer -->
+            <v-navigation-drawer app v-model="drawer" temporary>
+              <v-list>
+                <v-list-item @click="navigateTo('users.html')">
+                  <v-list-item-title>Find a mentor</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="navigateTo('users.html')">
+                  <v-list-item-title>Become a mentor</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="navigateTo('users.html')">
+                  <v-list-item-title>Log in</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="navigateTo('users.html')">
+                  <v-list-item-title>Sign up</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-navigation-drawer>
 
+            <!-- Hero Section -->
+            <v-row class="hero">
+              <v-col class="hero-content d-flex flex-column align-center justify-center">
+                <h1>Learn and grow with help from world-class mentors</h1>
+                <p>Book and meet over 6,000+ mentors for 1:1 mentorship in our global community.</p>
+                <v-text-field
+                  append-icon="mdi-magnify"
+                  label="Search by company, language or role, expertise, country"
+                  solo
+                  class="white--text searchbar"
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-img src="/images/logo.png" alt="Floating Image" class="floating-image image-logo" style="top: 70%; left: 10%;"></v-img>
+              <v-img src="/images/prof1.png" alt="Floating Image" class="floating-image image-prof1" style="top: 10%; left: 10%;"></v-img>
+              <v-img src="/images/prof5.png" alt="Floating Image" class="floating-image image-prof5" style="top: 30%; right: 10%;"></v-img>
+              <v-img src="/images/prof4.png" alt="Floating Image" class="floating-image image-prof4" style="top: 70%; left: 70%;"></v-img>
+            </v-row>
 
-<!-- Hero Section -->
-<v-row class="hero">
-  <v-col class="hero-content d-flex flex-column align-center justify-center">
-    <h1>Learn and grow with help from world-class mentors</h1>
-    <p>Book and meet over 6,000+ mentors for 1:1 mentorship in our global community.</p>
-    <v-text-field
-      append-icon="mdi-magnify"
-      label="Search by company, language or role, expertise, country"
-      solo
-      class="white--text searchbar"
-      hide-details
-    ></v-text-field>
-  </v-col>
-
-<v-img src="/images/logo.png" alt="Floating Image" class="floating-image image-logo" style="top: 70%; left: 10%;"></v-img>
-
-<v-img src="/images/prof1.png" alt="Floating Image" class="floating-image image-prof1" style="top: 10%; left: 10%;"></v-img>
-<v-img src="/images/prof5.png" alt="Floating Image" class="floating-image image-prof5" style="top: 30%; right: 10%;"></v-img>
-<v-img src="/images/prof4.png" alt="Floating Image" class="floating-image image-prof4" style="top: 70%; left: 70%;"></v-img>
-</v-row>
-
-
-
-<!-- World Map Section -->
+            <!-- World Map Section -->
             <v-row class="map-section">
               <v-col>
                 <h2>Expand your skillset, gain insights, and get support from mentors at no cost.</h2>
@@ -138,32 +136,27 @@
                     <v-divider></v-divider>
                     <v-stepper-step step="5">Schedule Meeting</v-stepper-step>
                   </v-stepper-header>
-
                   <v-stepper-items>
                     <v-stepper-content step="1">
                       <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
                       <v-btn color="primary" @click="e1 = 2">Continue</v-btn>
                       <v-btn text @click="e1 = 1">Cancel</v-btn>
                     </v-stepper-content>
-
                     <v-stepper-content step="2">
                       <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
                       <v-btn color="primary" @click="e1 = 3">Continue</v-btn>
                       <v-btn text @click="e1 = 1">Cancel</v-btn>
                     </v-stepper-content>
-
                     <v-stepper-content step="3">
                       <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
                       <v-btn color="primary" @click="e1 = 4">Continue</v-btn>
                       <v-btn text @click="e1 = 2">Cancel</v-btn>
                     </v-stepper-content>
-
                     <v-stepper-content step="4">
                       <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
                       <v-btn color="primary" @click="e1 = 5">Continue</v-btn>
                       <v-btn text @click="e1 = 3">Cancel</v-btn>
                     </v-stepper-content>
-
                     <v-stepper-content step="5">
                       <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
                       <v-btn color="primary">Finish</v-btn>
@@ -186,8 +179,6 @@
               </v-col>
             </v-row>
 
-            
-
             <!-- Mentors & Mentees Section -->
             <v-row class="mentors-mentees">
               <v-col>
@@ -205,58 +196,57 @@
 
             <!-- Testimonials Section -->
             <v-row class="testimonials">
-    <v-col>
-      <h2>Wins from all around the globe</h2>
-      <v-row>
-        <v-col v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-card" cols="12" md="3">
-          <v-img :src="testimonial.image" class="testimg" alt="Testimonial"></v-img>
-          <p>{{ testimonial.feedback }}</p>
-          <p><strong>{{ testimonial.name }}</strong></p>
-        </v-col>
-      </v-row>
-    </v-col>
-  </v-row>
+              <v-col>
+                <h2>Wins from all around the globe</h2>
+                <v-row>
+                  <v-col v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-card" cols="12" md="3">
+                    <v-img :src="testimonial.image" class="testimg" alt="Testimonial"></v-img>
+                    <p>{{ testimonial.feedback }}</p>
+                    <p><strong>{{ testimonial.name }}</strong></p>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
 
-           <!-- Footer -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="newsletter">
-      <h2>Subscribe to our Newsletter</h2>
-      <div class="newsletter-form">
-        <input 
-          type="email" 
-          placeholder="Enter your email address" 
-          class="newsletter-input"
-        />
-        <button class="newsletter-btn">Sign Up Now</button>
-      </div>
-    </div>
-    <div class="footer-links">
-      <a href="#">Contact</a>
-      <a href="#">About</a>
-      <a href="#">Terms of Service</a>
-    </div>
-    <div class="social-media">
-      <a href="#" class="social-icon" aria-label="Facebook">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="#" class="social-icon" aria-label="Twitter">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="#" class="social-icon" aria-label="LinkedIn">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-      <a href="#" class="social-icon" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-    </div>
-  </div>
-   <audio id="background-music" autoplay>
-    <source src="audio.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-</footer>
-
+            <!-- Footer -->
+            <footer class="footer">
+              <div class="footer-content">
+                <div class="newsletter">
+                  <h2>Subscribe to our Newsletter</h2>
+                  <div class="newsletter-form">
+                    <input 
+                      type="email" 
+                      placeholder="Enter your email address" 
+                      class="newsletter-input"
+                    />
+                    <button class="newsletter-btn">Sign Up Now</button>
+                  </div>
+                </div>
+                <div class="footer-links">
+                  <a href="#">Contact</a>
+                  <a href="#">About</a>
+                  <a href="#">Terms of Service</a>
+                </div>
+                <div class="social-media">
+                  <a href="#" class="social-icon" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </div>
+              </div>
+              <audio id="background-music" autoplay>
+                <source src="audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+            </footer>
           </v-container>
         </v-app>
       `
