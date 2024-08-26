@@ -51,6 +51,42 @@
 
   <div id="app">
     <v-app>
+       <!-- Navbar -->
+       <v-app-bar app class="navbar" color="black" dark>
+        <!-- Logo -->
+        <v-app-bar-nav-icon>
+          <v-img src="/images/logo.png" alt="ThriveLink Logo" max-height="50" contain></v-img>
+        </v-app-bar-nav-icon>
+        <v-toolbar-title>ThriveLink</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <v-btn text>Find a mentor</v-btn>
+          <v-btn text>Become a mentor</v-btn>
+          <v-btn text @click="navigateTo('users.html')">Log in</v-btn>
+          <v-btn outlined @click="navigateTo('users.html')">Sign up</v-btn>
+        </v-toolbar-items>
+        <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
+          <v-icon>mdi-menu</v-icon>
+        </v-app-bar-nav-icon>
+      </v-app-bar>
+
+      <!-- Navigation Drawer -->
+      <v-navigation-drawer app v-model="drawer" temporary>
+        <v-list>
+          <v-list-item @click="navigateTo('users.html')">
+            <v-list-item-title>Find a mentor</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="navigateTo('users.html')">
+            <v-list-item-title>Become a mentor</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="navigateTo('users.html')">
+            <v-list-item-title>Log in</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="navigateTo('users.html')">
+            <v-list-item-title>Sign up</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
       <v-container>
         <!-- Blog Header -->
         <div class="blog-header">Insights from our team</div>
