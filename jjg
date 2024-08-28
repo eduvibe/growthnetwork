@@ -1,29 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ThriveLink | Users</title>
-  <!-- Vuetify CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.7/dist/vuetify.min.css" rel="stylesheet">
-  <!-- Material Design Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-  <!-- Vue.js -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <!-- Vuetify JS -->
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.7/dist/vuetify.js"></script>
-  <!-- Vue Router -->
-  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.js"></script>
 
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@1.0.0-beta.14/build/player/lottie-player.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-      .neumorphic {
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .neumorphic {
             box-shadow: 8px 8px 16px #b3b3b3, -8px -8px 16px #ffffff;
             border-radius: 12px;
             padding: 16px;
@@ -101,222 +81,25 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-
-</style>
+    </style>
 </head>
-<body>
-  <div id="app">
-    <!-- Navigation Bar -->
-    <v-app>
-      <v-app-bar app color="black" dark>
-        <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
-          <v-icon>mdi-menu</v-icon>
-        </v-app-bar-nav-icon>
-        <v-img src="/images/logo.png" alt="ThriveLink Logo" max-height="50" contain class="mr-4"></v-img>
-        <v-toolbar-title>ThriveLink</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/">Home</v-btn>
-          <v-btn text to="/blog">Blog</v-btn>
-          <v-btn outlined v-if="!currentUser" to="/login">Login</v-btn>
-          <v-btn outlined v-if="!currentUser" to="/register">Register</v-btn>
-          <v-btn text v-if="currentUser" @click="logout">Logout</v-btn>
-        </v-toolbar-items>
-      </v-app-bar>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300 custom-scrollbar">
+    <div id="canvas-container"></div>
 
-      <!-- Navigation Drawer -->
-      <v-navigation-drawer v-model="drawer" app temporary>
-        <v-list>
-          <v-list-item link to="/">
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-          <v-list-item link to="/blog">
-            <v-list-item-title>Blog</v-list-item-title>
-          </v-list-item>
-          <v-list-item v-if="currentUser" @click="logout">
-            <v-list-item-title>Logout</v-list-item-title>
-          </v-list-item>
-          <v-list-item v-if="!currentUser" link to="/login">
-            <v-list-item-title>Login</v-list-item-title>
-          </v-list-item>
-          <v-list-item v-if="!currentUser" link to="/register">
-            <v-list-item-title>Register</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 glassmorphism">
+        <div class="flex items-center space-x-2">
+            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_kkflmtur.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+            <h1 class="text-2xl font-bold dark:text-white">ThriveLink</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search..." class="px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+            <button id="darkModeToggle" class="focus:outline-none p-2 rounded-full neumorphic" aria-label="Toggle Dark Mode">
+                <img id="darkModeIcon" src="https://img.icons8.com/ios-filled/50/000000/sun--v1.png" alt="Dark Mode Toggle" class="w-6 h-6">
+            </button>
+        </div>
+    </header>
 
-      <!-- Main Content -->
-      <v-main>
-        <router-view></router-view>
-      </v-main>
-
-      <!-- Footer -->
-      <v-footer app color="black" dark>
-        <v-col class="text-center" cols="12">
-          © 2024 ThriveLink - Mentor-Mentee Web App
-        </v-col>
-      </v-footer>
-    </v-app>
-  </div>
-
-  <script>
-    // Simulated User Data
-    let currentUser = null; // Set to an object with user data if logged in
-
-    // Authentication Guard for Routes
-    const requireAuth = (to, from, next) => {
-      if (currentUser) {
-        next();
-      } else {
-        next('/login');
-      }
-    };
-
-    // Define Vue Components
-    const HomePage = {
-      template: `
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="6" offset-md="3">
-              <v-card>
-                <v-img src="https://via.placeholder.com/800x400" class="white--text" height="200px">
-                  <v-card-title>Welcome to ThriveLink</v-card-title>
-                </v-img>
-                <v-card-subtitle>Connect with mentors and mentees to advance your career.</v-card-subtitle>
-                <v-card-actions>
-                  <v-btn color="primary" to="/login">Login</v-btn>
-                  <v-btn color="primary" to="/register">Register</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      `
-    };
-
-    const LoginPage = {
-      template: `
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="6" offset-md="3">
-              <v-card>
-                <v-card-title>Login</v-card-title>
-                <v-card-text>
-                  <v-form>
-                    <v-text-field label="Email" prepend-icon="mdi-email" v-model="email"></v-text-field>
-                    <v-text-field label="Password" prepend-icon="mdi-lock" v-model="password" type="password"></v-text-field>
-                    <v-btn color="primary" @click="login">Login</v-btn>
-                  </v-form>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      `,
-      data() {
-        return {
-          email: '',
-          password: ''
-        };
-      },
-      methods: {
-        login() {
-          if (this.email && this.password) {
-            currentUser = { role: 'mentee' }; // Change this to 'mentor' if needed
-            this.$router.push(currentUser.role === 'mentor' ? '/mentor-dashboard' : '/dashboard');
-          } else {
-            alert('Please fill in both fields.');
-          }
-        }
-      }
-    };
-
-    const RegistrationPage = {
-      template: `
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="6" offset-md="3">
-              <v-card>
-                <v-card-title>Register</v-card-title>
-                <v-card-text>
-                  <v-form>
-                    <v-text-field label="Name" v-model="name"></v-text-field>
-                    <v-text-field label="Email" prepend-icon="mdi-email" v-model="email"></v-text-field>
-                    <v-text-field label="Password" prepend-icon="mdi-lock" v-model="password" type="password"></v-text-field>
-                    <v-select label="Role" :items="['mentor', 'mentee']" v-model="role"></v-select>
-                    <v-btn color="primary" @click="register">Register</v-btn>
-                  </v-form>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      `,
-      data() {
-        return {
-          name: '',
-          email: '',
-          password: '',
-          role: ''
-        };
-      },
-      methods: {
-        register() {
-          if (this.name && this.email && this.password && this.role) {
-            currentUser = { name: this.name, role: this.role };
-            this.$router.push('/login');
-          } else {
-            alert('Please fill in all fields.');
-          }
-        }
-      }
-    };
-
-    const DashboardMentee = {
-      template: `
-        <v-container>
-          <v-row>
-            <v-col cols="12">
-              <v-card>
-                <v-card-title>Welcome, Mentee!</v-card-title>
-                <v-card-subtitle>Manage your tasks, messages, and resources here.</v-card-subtitle>
-                <v-card-text>
-                  <v-btn color="primary" to="/search-mentors">Search for Mentors</v-btn>
-                  <v-btn color="primary" to="/tasks">Tasks</v-btn>
-                  <v-btn color="primary" to="/messages">Messages</v-btn>
-                  <v-btn color="primary" to="/resources">Resources</v-btn>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      `
-    };
-
-    const DashboardMentor = {
-      template: `
-        <v-container>
-          <v-row>
-            <v-col cols="12">
-              <v-card>
-                <v-card-title>Welcome, Mentor!</v-card-title>
-                <v-card-subtitle>Manage your mentees, tasks, and meetings here.</v-card-subtitle>
-                <v-card-text>
-                  <v-btn color="primary" to="/mentee-profiles">Mentee Profiles</v-btn>
-                  <v-btn color="primary" to="/mentor-requests">Mentor Requests</v-btn>
-                  <v-btn color="primary" to="/tasks">Manage Tasks</v-btn>
-                  <v-btn color="primary" to="/scheduler">Schedule Meetings</v-btn>
-                  <v-btn color="primary" to="/messages">Messages</v-btn>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      `
-    };
-
-    const BlogPage = {
-      template: `
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-5 gap-4">
@@ -442,46 +225,214 @@
             </div>
         </div>
     </div>
-      `
-    };
 
-    // Configure Vue Router
-    const router = new VueRouter({
-      routes: [
-        { path: '/', component: HomePage },
-        { path: '/login', component: LoginPage },
-        { path: '/register', component: RegistrationPage },
-        { path: '/dashboard', component: DashboardMentee, beforeEnter: requireAuth },
-        { path: '/mentor-dashboard', component: DashboardMentor, beforeEnter: requireAuth },
-        { path: '/blog', component: BlogPage }
-      ]
-    });
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            darkModeIcon.src = document.body.classList.contains('dark-mode') 
+                ? 'https://img.icons8.com/ios-filled/50/ffffff/moon-satellite.png' 
+                : 'https://img.icons8.com/ios-filled/50/000000/sun--v1.png';
+        });
 
-    // Create Vue Instance
-    new Vue({
-      vuetify: new Vuetify(),
-      router,
-      el: '#app',
-      data() {
-        return {
-          drawer: false,
-          currentUser
+        // Local Storage for Dark Mode
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('dark-mode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                darkModeIcon.src = 'https://img.icons8.com/ios-filled/50/ffffff/moon-satellite.png';
+            }
+        });
+
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                darkModeIcon.src = 'https://img.icons8.com/ios-filled/50/ffffff/moon-satellite.png';
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                darkModeIcon.src = 'https://img.icons8.com/ios-filled/50/000000/sun--v1.png';
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+        });
+
+        // Add To-Do Task
+        const addTodoButton = document.getElementById('addTodoBtn');
+        const newTodoInput = document.getElementById('newTodoInput');
+        const todoList = document.getElementById('todoList');
+        addTodoButton.addEventListener('click', () => {
+            if (newTodoInput.value.trim()) {
+                const li = document.createElement('li');
+                li.className = 'dark:text-gray-300 flex items-center justify-between';
+                li.innerHTML = `
+                    <span>${newTodoInput.value.trim()}</span>
+                    <button class="text-red-500 hover:text-red-600 transition-colors duration-300">❌</button>
+                `;
+                todoList.appendChild(li);
+                newTodoInput.value = '';
+            }
+        });
+
+        // Allow adding task with Enter key
+        newTodoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodoButton.click();
+        });
+
+        // Handle task deletion
+        todoList.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                e.target.parentElement.remove();
+            }
+        });
+
+        // Dummy Data for Posts
+        const posts = [
+            { author: 'Jane Doe', content: 'AI is going to revolutionize the tech industry. What are your thoughts on the ethical implications?', avatar: 'https://picsum.photos/id/1005/50', likes: 120, comments: 45, shares: 10 },
+            { author: 'John Smith', content: 'Just published my latest blog on space exploration! Check it out and let me know what you think about the future of interplanetary travel.', avatar: 'https://picsum.photos/id/1006/50', likes: 75, comments: 15, shares: 5 },
+            { author: 'Alice Johnson', content: `Mental health is just as important as physical health. Today, let's talk about stress management techniques that work for you!`, avatar: 'https://picsum.photos/id/1008/50', likes: 95, comments: 20, shares: 8}
+        ];
+
+        const postsContainer = document.getElementById('posts');
+        let postIndex = 0;
+
+        // Function to render posts
+        function renderPosts() {
+            posts.slice(postIndex, postIndex + 3).forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'neumorphic p-4 transition-all duration-300 hover:scale-105';
+                postElement.innerHTML = `
+                    <div class="flex items-center mb-2">
+                        <img src="${post.avatar}" alt="${post.author}'s avatar" class="w-10 h-10 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold dark:text-white">${post.author}</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Posted 2 hours ago</p>
+                        </div>
+                    </div>
+                    <p class="dark:text-gray-300 mb-4">${post.content}</p>
+                    <div class="flex justify-between items-center dark:text-gray-400">
+                        <button class="like-btn flex items-center space-x-1 hover:text-blue-500 transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                            </svg>
+                            <span>${post.likes} Likes</span>
+                        </button>
+                        <button class="comment-btn flex items-center space-x-1 hover:text-green-500 transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                            </svg>
+                            <span>${post.comments} Comments</span>
+                        </button>
+                        <button class="share-btn flex items-center space-x-1 hover:text-yellow-500 transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                            </svg>
+                            <span>${post.shares} Shares</span>
+                        </button>
+                    </div>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+            postIndex += 3;
+        }
+
+        document.getElementById('loadMoreBtn').addEventListener('click', renderPosts);
+
+        // Initially load a few posts
+        renderPosts();
+
+        // Post Comment Modal
+        const commentModal = document.getElementById('commentModal');
+        const commentInput = document.getElementById('commentInput');
+        const submitCommentBtn = document.getElementById('submitCommentBtn');
+        const closeCommentModal = document.getElementById('closeCommentModal');
+
+        postsContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.comment-btn')) {
+                commentModal.classList.remove('hidden');
+                gsap.from(commentModal.firstElementChild, {duration: 0.5, y: 50, opacity: 0, ease: "back.out(1.7)"});
+            }
+        });
+
+        submitCommentBtn.addEventListener('click', () => {
+            if (commentInput.value.trim()) {
+                alert('Comment submitted: ' + commentInput.value.trim());
+                commentInput.value = '';
+                commentModal.classList.add('hidden');
+            }
+        });
+
+        closeCommentModal.addEventListener('click', () => {
+            commentModal.classList.add('hidden');
+        });
+
+        // Three.js Background Animation
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+        const torus = new THREE.Mesh(geometry, material);
+        scene.add(torus);
+
+        camera.position.z = 30;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            torus.rotation.x += 0.01;
+            torus.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // GSAP Animations
+        gsap.from("#trendingTopics li", {
+            duration: 0.5,
+            opacity: 0,
+            y: 20,
+            stagger: 0.1,
+            ease: "power2.out"
+        });
+
+        gsap.from("#categories span", {
+            duration: 0.5,
+            opacity: 0,
+            scale: 0.5,
+            stagger: 0.1,
+            ease: "back.out(1.7)"
+        });
+
+        // Intersection Observer for post animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    gsap.from(entry.target, {
+                        duration: 0.5,
+                        opacity: 0,
+                        y: 50,
+                        ease: "power2.out"
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe posts as they are added
+        const observePosts = () => {
+            document.querySelectorAll('#posts > div').forEach(post => {
+                observer.observe(post);
+            });
         };
-      },
-      methods: {
-        logout() {
-          currentUser = null;
-          this.$router.push('/');
-        }
-      },
-      watch: {
-        currentUser(value) {
-          if (value) {
-            this.$router.push(value.role === 'mentor' ? '/mentor-dashboard' : '/dashboard');
-          }
-        }
-      }
-    });
-  </script>
-</body>
-</html>
+
+        // Call observePosts after rendering posts
+        const originalRenderPosts = renderPosts;
+        renderPosts = () => {
+            originalRenderPosts();
+            observePosts();
+        };
+
+        // Initial call to observePosts
+        observePosts();
+    </script>
