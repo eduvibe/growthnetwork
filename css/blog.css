@@ -24,9 +24,11 @@ header{
     top: 0;
     width: 100%;
     z-index: 100;
-    margin-bottom: 3rem;
 }
 
+main{
+    margin-top: 6rem!important;
+}
 .neumorphic {
     background: var(--background-light);
     box-shadow: 1px 1px 0px #cccccc, -2px -2px 10px #ffffff;
