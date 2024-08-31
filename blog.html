@@ -1,192 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Page</title>
-  <!-- Vuetify CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.4/dist/vuetify.min.css" rel="stylesheet">
-  <!-- Vue CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <!-- Vuetify JS -->
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.4/dist/vuetify.js"></script>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    .blog-header {
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 16px;
-    }
-    .blog-subheader {
-      color: #757575;
-      font-size: 18px;
-      margin-bottom: 32px;
-    }
-    .blog-sidebar {
-      padding-right: 20px;
-    }
-    .blog-card {
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border: 1px solid #e0e0e0;
-    }
-    .newsletter {
-      background-color: #f5f5f5;
-      padding: 20px;
-      border-radius: 8px;
-    }
-  </style>
-</head>
-<body>
-  <div id="app">
-    <v-app>
-      <!-- Navbar -->
-      <v-app-bar app color="black" dark>
-        <v-app-bar-nav-icon>
-          <v-img src="/images/logo.png" alt="ThriveLink Logo" max-height="50" contain></v-img>
-        </v-app-bar-nav-icon>
-        <v-toolbar-title>ThriveLink</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text>Find a mentor</v-btn>
-          <v-btn text>Become a mentor</v-btn>
-          <v-btn text @click="navigateTo('users.html')">Log in</v-btn>
-          <v-btn outlined @click="navigateTo('users.html')">Sign up</v-btn>
-        </v-toolbar-items>
-        <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
-          <v-icon>mdi-menu</v-icon>
-        </v-app-bar-nav-icon>
-      </v-app-bar>
-
-      <!-- Navigation Drawer -->
-      <v-navigation-drawer app v-model="drawer" temporary>
-        <v-list>
-          <v-list-item @click="navigateTo('users.html')">
-            <v-list-item-title>Find a mentor</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="navigateTo('users.html')">
-            <v-list-item-title>Become a mentor</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="navigateTo('users.html')">
-            <v-list-item-title>Log in</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="navigateTo('users.html')">
-            <v-list-item-title>Sign up</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-
-      <v-container>
-        <!-- Blog Header -->
-        <div class="blog-header">Insights from our team</div>
-        <div class="blog-subheader">Powerful Trading Tools and Features for Experienced Investors</div>
-
-        <v-row>
-          <!-- Sidebar -->
-          <v-col cols="12" md="3">
-            <div class="blog-sidebar">
-              <v-card>
-                <v-card-title>Blog Topics</v-card-title>
-                <v-list>
-                  <v-list-item>Company</v-list-item>
-                  <v-list-item>Design</v-list-item>
-                  <v-list-item>Technology</v-list-item>
-                  <v-list-item>Crypto</v-list-item>
-                  <v-list-item>Artificial Intelligence</v-list-item>
-                  <v-list-item>Work</v-list-item>
-                </v-list>
-              </v-card>
-              <v-card class="mt-4">
-                <v-card-title>Guide and Tools</v-card-title>
-                <v-list>
-                  <v-list-item>Guidelines</v-list-item>
-                  <v-list-item>Mentorship</v-list-item>
-                  <v-list-item>Tutorial</v-list-item>
-                  <v-list-item>Training</v-list-item>
-                  <v-list-item>Career</v-list-item>
-                  <v-list-item>Self Care</v-list-item>
-                </v-list>
-              </v-card>
-            </div>
-          </v-col>
-
-          <!-- Main Content -->
-          <v-col cols="12" md="9">
-            <v-row>
-              <!-- Trending Topics -->
-              <v-col cols="12">
-                <v-chip-group active-class="white--text" row>
-                  <v-chip color="primary">Design Thinking</v-chip>
-                  <v-chip>Technology</v-chip>
-                  <v-chip>Web3</v-chip>
-                  <v-chip>Programming</v-chip>
-                  <v-chip>AI</v-chip>
-                </v-chip-group>
-              </v-col>
-              <!-- Blog Post 1 -->
-              <v-col cols="12">
-                <v-card class="blog-card">
-                  <v-card-title>Powerful Trading Tools and Features for Experienced Investors</v-card-title>
-                  <v-card-subtitle>
-                    <v-chip color="grey lighten-2">Tools</v-chip>
-                    <v-icon class="ml-2 mr-1" color="primary">mdi-account</v-icon> By Mark Tuchel
-                    <v-icon class="ml-2 mr-1" color="primary">mdi-clock</v-icon> 7 min read
-                  </v-card-subtitle>
-                  <v-card-text>
-                    I'm always trying to think of new and interesting business ideas. I generally try to come up
-                    with ideas by thinking of what I would want to do or see in the world...
-                  </v-card-text>
-                </v-card>
-              </v-col>
-
-              <!-- Blog Post 2 -->
-              <v-col cols="12">
-                <v-card class="blog-card">
-                  <v-card-title>We are implementing AI and Technology</v-card-title>
-                  <v-card-subtitle>
-                    <v-chip color="grey lighten-2">AI</v-chip>
-                    <v-icon class="ml-2 mr-1" color="primary">mdi-account</v-icon> By Harry Oland
-                    <v-icon class="ml-2 mr-1" color="primary">mdi-clock</v-icon> 4 min read
-                  </v-card-subtitle>
-                  <v-card-text>
-                    I'm always trying to think of new and interesting business ideas. I generally try to come up
-                    with ideas by thinking of what I would want to do or see in the world...
-                  </v-card-text>
-                </v-card>
-              </v-col>
-
-              <!-- Newsletter Section -->
-              <v-col cols="12">
-                <v-card class="newsletter">
-                  <v-card-title>Stay up to date</v-card-title>
-                  <v-card-subtitle>Join Our Newsletter</v-card-subtitle>
-                  <v-text-field label="Enter your email" prepend-icon="mdi-email"></v-text-field>
-                  <v-btn color="primary">Submit</v-btn>
-                  <p><small>*You can unsubscribe anytime</small></p>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-app>
-  </div>
-
-  <script>
-    new Vue({
-      el: '#app',
-      vuetify: new Vuetify(),
-      data: {
-        drawer: false
-      },
-      methods: {
-        navigateTo(url) {
-          window.location.href = url;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThriveLink - Connect and Thrive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-color': '#4a90e2',
+                        'secondary-color': '#f39c12',
+                    }
+                }
+            }
         }
-      }
-    })
-  </script>
+    </script>
+    <link rel="stylesheet" href="/css/blog.css">
+
+</head>
+<body class="bg-gray-100 text-gray-800 transition-colors duration-300">
+
+<header class="bg-white shadow-md p-4 sticky top-0 z-50 transition-colors duration-300">
+    <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo and Brand Name -->
+        <div class="flex items-center space-x-4">
+            <img src="https://picsum.photos/200/200?random=1" alt="Logo" class="h-10 w-10 rounded-full"> 
+            <h1 class="text-3xl font-bold text-primary-color">ThriveLink</h1>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex space-x-6">
+            <a href="#home" class="text-primary-color hover:underline text-lg">Home</a>
+            <a href="#dashboard" class="text-primary-color hover:underline text-lg">Dashboard</a>
+            <a href="#profile" class="text-primary-color hover:underline text-lg">Profile</a>
+            <a href="#messages" class="text-primary-color hover:underline text-lg">Messages</a>
+        </nav>
+
+        <!-- Dark Mode Toggle -->
+        <button id="darkModeToggle" class="neumorphic p-2 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button>
+    </div>
+</header>
+
+<main class="container mx-auto mt-8 grid grid-cols-12 gap-8">
+    <aside class="col-span-3">
+        <div class="neumorphic p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Trending Topics</h2>
+            <ul id="trendingTopics" class="space-y-3">
+                <!-- Trending topics will be dynamically added here -->
+            </ul>
+        </div>
+        <div class="neumorphic p-6">
+            <h2 class="text-2xl font-semibold mb-4">Categories</h2>
+            <div id="categories" class="flex flex-wrap gap-3">
+                <!-- Categories will be dynamically added here -->
+            </div>
+        </div>
+    </aside>
+
+    <section class="col-span-6">
+        <!-- Active Members Section -->
+        <div id="activeMembers" class="neumorphic px-4 py-3 mb-8 flex items-center space-x-3 overflow-x-auto">
+            <!-- Active members will be dynamically added here -->
+        </div>
+
+        <!-- User Information and Post Section -->
+        <div class="neumorphic p-6 mb-8">
+            <div class="flex space-x-4 mb-4">
+                <div id="categoryTabs" class="flex space-x-3 overflow-x-auto">
+                    <!-- Category tabs will be dynamically added here -->
+                </div>
+            </div>
+            <textarea id="postInput" class="w-full p-4 rounded-lg neumorphic resize-none" rows="3" placeholder="What's on your mind?"></textarea>
+
+            <!-- Post Button and Media Options -->
+            <div class="flex items-center space-x-4 mt-4">
+                <button id="submitPost" class="bg-primary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Post</button>
+                <label class="flex items-center cursor-pointer">
+                    <i class="fas fa-image text-primary-color text-xl mx-2"></i>
+                    <input type="file" id="imageInput" accept="image/*" class="hidden">
+                </label>
+                <label class="flex items-center cursor-pointer">
+                    <i class="fas fa-video text-primary-color text-xl mx-2"></i>
+                    <input type="text" id="videoInput" class="hidden" placeholder="Paste video URL">
+                </label>
+            </div>
+        </div>
+
+        <div id="posts" class="space-y-8">
+            <!-- Posts will be dynamically added here -->
+        </div>
+        <div id="loadMore" class="text-center mt-8">
+            <button class="bg-secondary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Load More</button>
+        </div>
+    </section>
+
+    <aside class="col-span-3">
+        <div class="neumorphic p-6">
+            <h2 class="text-2xl font-semibold mb-4">To-Do List</h2>
+            <ul id="todoList" class="space-y-3">
+                <!-- To-do items will be dynamically added here -->
+            </ul>
+            <div class="mt-4 flex">
+                <input id="todoInput" type="text" class="w-full p-2 rounded-l-lg neumorphic" placeholder="Add a new task">
+                <button id="addTodo" class="bg-primary-color text-white px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition duration-300">Add</button>
+            </div>
+        </div>
+    </aside>
+</main>
+<script src="/js/blogapp.js"></script>
 </body>
 </html>
