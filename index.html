@@ -61,8 +61,8 @@
               <v-toolbar-items class="hidden-sm-and-down">
                 <v-btn text>Find a mentor</v-btn>
                 <v-btn text>Become a mentor</v-btn>
-                <v-btn text @click="navigateTo('users.html')">Log in</v-btn>
-                <v-btn outlined @click="navigateTo('users.html')">Sign up</v-btn>
+                <v-btn text @click="navigateTo('blog.html')">Log in</v-btn>
+                <v-btn outlined @click="navigateTo('blog.html')">Sign up</v-btn>
               </v-toolbar-items>
               <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
                 <v-icon>mdi-menu</v-icon>
@@ -72,16 +72,16 @@
             <!-- Navigation Drawer -->
             <v-navigation-drawer app v-model="drawer" temporary>
               <v-list>
-                <v-list-item @click="navigateTo('users.html')">
+                <v-list-item @click="navigateTo('blog.html')">
                   <v-list-item-title>Find a mentor</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="navigateTo('users.html')">
+                <v-list-item @click="navigateTo('blog.html')">
                   <v-list-item-title>Become a mentor</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="navigateTo('users.html')">
+                <v-list-item @click="navigateTo('blog.html')">
                   <v-list-item-title>Log in</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="navigateTo('users.html')">
+                <v-list-item @click="navigateTo('blog.html')">
                   <v-list-item-title>Sign up</v-list-item-title>
                 </v-list-item>
               </v-list>
