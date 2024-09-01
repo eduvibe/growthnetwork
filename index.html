@@ -22,6 +22,24 @@
         return {
           drawer: false,
           e1: 1,
+          showLogin: false,
+          showSignup: false,
+          loginValid: false,
+          signupValid: false,
+          loginEmail: '',
+          loginPassword: '',
+          signupName: '',
+          signupEmail: '',
+          signupPassword: '',
+          emailRules: [
+            v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+          ],
+          passwordRules: [
+            v => !!v || 'Password is required'
+          ],
+          nameRules: [
+            v => !!v || 'Name is required'
+          ],
           mentors: [
             { image: '/images/prof2.png', name: 'John Doe', title: 'Senior Developer' },
             { image: '/images/ment1.jpg', name: 'Jane Smith', title: 'UI/UX Designer' },
@@ -45,6 +63,22 @@
       methods: {
         navigateTo(url) {
           window.location.href = url; // Navigate to external HTML file
+        },
+        loginSubmit() {
+          if (this.$refs.loginForm.validate()) {
+            // Logic for login (e.g., send to server)
+            // On success:
+            this.showLogin = false;
+            window.location.href = 'blog.html';
+          }
+        },
+        signupSubmit() {
+          if (this.$refs.signupForm.validate()) {
+            // Logic for signup (e.g., send to server)
+            // On success:
+            this.showSignup = false;
+            window.location.href = 'blog.html';
+          }
         }
       },
       template: `
@@ -61,8 +95,8 @@
               <v-toolbar-items class="hidden-sm-and-down">
                 <v-btn text>Find a mentor</v-btn>
                 <v-btn text>Become a mentor</v-btn>
-                <v-btn text @click="navigateTo('blog.html')">Log in</v-btn>
-                <v-btn outlined @click="navigateTo('blog.html')">Sign up</v-btn>
+                <v-btn text @click="showLogin = true">Log in</v-btn>
+                <v-btn outlined @click="showSignup = true">Sign up</v-btn>
               </v-toolbar-items>
               <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up">
                 <v-icon>mdi-menu</v-icon>
@@ -78,14 +112,70 @@
                 <v-list-item @click="navigateTo('blog.html')">
                   <v-list-item-title>Become a mentor</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="navigateTo('blog.html')">
+                <v-list-item @click="showLogin = true">
                   <v-list-item-title>Log in</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="navigateTo('blog.html')">
+                <v-list-item @click="showSignup = true">
                   <v-list-item-title>Sign up</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-navigation-drawer>
+
+            <!-- Login Modal -->
+            <v-dialog v-model="showLogin" max-width="500px">
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Login</span>
+                </v-card-title>
+                <v-card-subtitle>Sign in to your account</v-card-subtitle>
+                <v-form v-model="loginValid" ref="loginForm">
+                  <v-card-text>
+                    <v-text-field
+                      v-model="loginEmail"
+                      label="Email"
+                      :rules="emailRules"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="loginPassword"
+                      label="Password"
+                      :rules="passwordRules"
+                      type="password"
+                      required
+                    ></v-text-field>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="showLogin = false">Cancel</v-btn>
+                    <v-btn color="primary" @click="loginSubmit">Login</v-btn>
+                  </v-card-actions>
+                </v-form>
+              </v-card>
+            </v-dialog>
+
+            <!-- Signup Modal -->
+            <v-dialog v-model="showSignup" max-width="500px">
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Sign Up</span>
+                </v-card-title>
+                <v-card-subtitle>Create a new account</v-card-subtitle>
+                <v-form v-model="signupValid" ref="signupForm">
+                  <v-card-text>
+                    <v-text-field  v-model="signupName"label="Name":rules="nameRules" required></v-text-field>
+                    <v-text-field v-model="signupEmail" label="Email" :rules="emailRules" required></v-text-field>
+                    <v-text-field  v-model="signupPassword" label="Password" :rules="passwordRules" type="password"
+                      required
+                    ></v-text-field>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="showSignup = false">Cancel</v-btn>
+                    <v-btn color="primary" @click="signupSubmit">Sign Up</v-btn>
+                  </v-card-actions>
+                </v-form>
+              </v-card>
+            </v-dialog>
 
             <!-- Hero Section -->
             <v-row class="hero">
