@@ -20,7 +20,6 @@
         }
     </script>
     <link rel="stylesheet" href="/css/blog.css">
-
 </head>
 <body class="bg-gray-100 text-gray-800 transition-colors duration-300">
 
@@ -28,12 +27,17 @@
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo and Brand Name -->
         <div class="flex items-center space-x-4">
-            <img src="/images/logo.png" alt="Logo" class="h-10 w-10"> 
+            <img src="/images/logo.png" alt="Logo" class="h-10 w-10">
             <h1 class="text-3xl font-bold text-primary-color">ThriveLink</h1>
         </div>
 
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuButton" class="text-primary-color md:hidden">
+            <i class="fas fa-bars fa-lg"></i>
+        </button>
+
         <!-- Navigation Links -->
-        <nav class="flex space-x-6">
+        <nav id="mainNav" class="hidden md:flex space-x-6">
             <a href="#home" class="text-primary-color hover:underline text-lg">Home</a>
             <a href="#dashboard" class="text-primary-color hover:underline text-lg">Dashboard</a>
             <a href="#profile" class="text-primary-color hover:underline text-lg">Profile</a>
@@ -47,10 +51,20 @@
             </svg>
         </button>
     </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobileMenu" class="md:hidden bg-white shadow-md">
+        <div class="flex flex-col p-4">
+            <a href="#home" class="text-primary-color hover:underline text-lg py-2">Home</a>
+            <a href="#dashboard" class="text-primary-color hover:underline text-lg py-2">Dashboard</a>
+            <a href="#profile" class="text-primary-color hover:underline text-lg py-2">Profile</a>
+            <a href="#messages" class="text-primary-color hover:underline text-lg py-2">Messages</a>
+        </div>
+    </nav>
 </header>
 
 <main class="container mx-auto mt-8 grid grid-cols-12 gap-8">
-    <aside class="col-span-3">
+    <aside class="col-span-12 md:col-span-3">
         <div class="neumorphic p-6 mb-8">
             <h2 class="text-2xl font-semibold mb-4">Trending Topics</h2>
             <ul id="trendingTopics" class="space-y-3">
@@ -65,7 +79,7 @@
         </div>
     </aside>
 
-    <section class="col-span-6">
+    <section class="col-span-12 md:col-span-6">
         <!-- Active Members Section -->
         <div id="activeMembers" class="neumorphic px-4 py-3 mb-8 flex items-center space-x-3 overflow-x-auto">
             <!-- Active members will be dynamically added here -->
@@ -102,7 +116,7 @@
         </div>
     </section>
 
-    <aside class="col-span-3">
+    <aside class="col-span-12 md:col-span-3">
         <div class="neumorphic p-6">
             <h2 class="text-2xl font-semibold mb-4">To-Do List</h2>
             <ul id="todoList" class="space-y-3">
@@ -115,6 +129,13 @@
         </div>
     </aside>
 </main>
+
 <script src="/js/blogapp.js"></script>
+<script>
+    document.getElementById('mobileMenuButton').addEventListener('click', () => {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('hidden');
+    });
+</script>
 </body>
 </html>
