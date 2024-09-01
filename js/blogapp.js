@@ -16,35 +16,74 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dark mode toggle
     darkModeToggle.addEventListener('click', () => {
         body.classList.toggle('dark');
-        gsap.to('body', {backgroundColor: body.classList.contains('dark') ? '#1a202c' : '#f7fafc', duration: 0.5});
+        gsap.to('body', { backgroundColor: body.classList.contains('dark') ? '#1a202c' : '#f7fafc', duration: 0.5 });
     });
 
-    // Add trending topics
-    const topics = ['Web Development', 'AI and Machine Learning', 'Cryptocurrency', 'Climate Change', 'Mental Health'];
-    topics.forEach((topic, index) => {
-        const li = document.createElement('li');
-        li.textContent = topic;
-        li.className = 'cursor-pointer hover:text-primary-color transition duration-300';
-        trendingTopics.appendChild(li);
-        gsap.from(li, {opacity: 0, x: -50, duration: 0.5, delay: index * 0.1});
-    });
+    // Data for trending topics and categories
+    const topicsData = {
+        'Web Development': ['JavaScript', 'React', 'Node.js'],
+        'AI and Machine Learning': ['TensorFlow', 'PyTorch', 'Scikit-Learn'],
+        'Cryptocurrency': ['Bitcoin', 'Ethereum', 'Litecoin'],
+        'Climate Change': ['Renewable Energy', 'Carbon Footprint', 'Climate Policies'],
+        'Mental Health': ['Therapy', 'Mindfulness', 'Stress Management']
+    };
 
-    // Add categories
-    const categoryList = ['Technology', 'Science', 'Health', 'Business', 'Entertainment'];
-    categoryList.forEach((cat, index) => {
-        const div = document.createElement('div');
-        div.textContent = cat;
-        div.className = 'category-pill bg-primary-color text-white px-4 py-2 rounded-full cursor-pointer hover:bg-opacity-80 transition duration-300';
-        categories.appendChild(div);
+    const categoryData = {
+        'Technology': ['Web Development', 'AI and Machine Learning', 'Cryptocurrency'],
+        'Science': ['Climate Change'],
+        'Health': ['Mental Health'],
+        'Business': ['Cryptocurrency'],
+        'Entertainment': []
+    };
 
-        const tab = document.createElement('button');
-        tab.textContent = cat;
-        tab.className = 'category-pill bg-gray-200 px-4 py-2 rounded-full hover:bg-primary-color hover:text-white transition duration-300';
-        categoryTabs.appendChild(tab);
+    // Function to render trending topics
+    function renderTrendingTopics() {
+        trendingTopics.innerHTML = '';
+        Object.keys(topicsData).forEach(topic => {
+            const li = document.createElement('li');
+            li.textContent = topic;
+            li.className = 'cursor-pointer hover:text-primary-color transition duration-300';
+            li.addEventListener('click', () => {
+                renderPosts(topicsData[topic]);
+            });
+            trendingTopics.appendChild(li);
+            gsap.from(li, { opacity: 0, x: -50, duration: 0.5 });
+        });
+    }
 
-        gsap.from(div, {opacity: 0, y: 20, duration: 0.5, delay: index * 0.1});
-        gsap.from(tab, {opacity: 0, y: 20, duration: 0.5, delay: index * 0.1});
-    });
+    // Function to render categories
+    function renderCategories() {
+        categories.innerHTML = '';
+        categoryTabs.innerHTML = '';
+        Object.keys(categoryData).forEach(cat => {
+            const div = document.createElement('div');
+            div.textContent = cat;
+            div.className = 'category-pill bg-primary-color text-white px-4 py-2 rounded-full cursor-pointer hover:bg-opacity-80 transition duration-300';
+            div.addEventListener('click', () => {
+                renderPosts(categoryData[cat]);
+            });
+            categories.appendChild(div);
+
+            const tab = document.createElement('button');
+            tab.textContent = cat;
+            tab.className = 'category-pill bg-gray-200 px-4 py-2 rounded-full hover:bg-primary-color hover:text-white transition duration-300';
+            tab.addEventListener('click', () => {
+                renderPosts(categoryData[cat]);
+            });
+            categoryTabs.appendChild(tab);
+
+            gsap.from(div, { opacity: 0, y: 20, duration: 0.5 });
+            gsap.from(tab, { opacity: 0, y: 20, duration: 0.5 });
+        });
+    }
+
+    // Function to render posts based on a given set of topics
+    function renderPosts(topics) {
+        posts.innerHTML = ''; // Clear previous posts
+        topics.forEach(topic => {
+            addPost(`Discussion on ${topic}`);
+        });
+    }
 
     // Post submission
     submitPost.addEventListener('click', () => {
@@ -74,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         posts.insertBefore(post, posts.firstChild);
-        gsap.from(post, {duration: 0.5, y: 50, opacity: 0, ease: "back.out(1.7)"});
+        gsap.from(post, { duration: 0.5, y: 50, opacity: 0, ease: "back.out(1.7)" });
     }
 
     // Load more posts
@@ -97,17 +136,17 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             todoList.appendChild(li);
             todoInput.value = '';
-            gsap.from(li, {duration: 0.5, x: -50, opacity: 0, ease: "back.out(1.7)"});
+            gsap.from(li, { duration: 0.5, x: -50, opacity: 0, ease: "back.out(1.7)" });
         }
     });
 
     // Add active members
     const members = [
-        {name: 'Alice', status: 'online'},
-        {name: 'Bob', status: 'offline'},
-        {name: 'Charlie', status: 'online'},
-        {name: 'Diana', status: 'offline'},
-        {name: 'Eve', status: 'online'}
+        { name: 'Alice', status: 'online' },
+        { name: 'Bob', status: 'offline' },
+        { name: 'Charlie', status: 'online' },
+        { name: 'Diana', status: 'offline' },
+        { name: 'Eve', status: 'online' }
     ];
 
     members.forEach((member, index) => {
@@ -119,14 +158,16 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="text-sm">${member.name}</span>
         `;
         activeMembers.appendChild(div);
-        gsap.from(div, {opacity: 0, x: 20, duration: 0.5, delay: index * 0.1});
+        gsap.from(div, { opacity: 0, x: 20, duration: 0.5, delay: index * 0.1 });
     });
 
     // Initialize with some posts
-    for (let i = 0; i < 3; i++) {
-        addPost('Welcome to ThriveLink! Connect, share, and thrive together. #CommunityGrowth');
-    }
+    renderPosts(Object.values(topicsData).flat());
 
     // Add float animation to certain elements
-    gsap.to('.float-animation', {y: -10, duration: 1.5, repeat: -1, yoyo: true, ease: "power1.inOut"});
+    gsap.to('.float-animation', { y: -10, duration: 1.5, repeat: -1, yoyo: true, ease: "power1.inOut" });
+
+    // Render initial data
+    renderTrendingTopics();
+    renderCategories();
 });
