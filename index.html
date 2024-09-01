@@ -65,21 +65,21 @@
           window.location.href = url; // Navigate to external HTML file
         },
         loginSubmit() {
-          if (this.$refs.loginForm.validate()) {
-            // Logic for login (e.g., send to server)
-            // On success:
-            this.showLogin = false;
-            window.location.href = 'blog.html';
-          }
-        },
-        signupSubmit() {
-          if (this.$refs.signupForm.validate()) {
-            // Logic for signup (e.g., send to server)
-            // On success:
-            this.showSignup = false;
-            window.location.href = 'blog.html';
-          }
-        }
+    this.$refs.loginForm.validate();
+    if (this.loginValid) {
+      // Logic for login (e.g., send to server)
+      this.showLogin = false;
+      window.location.href = 'blog.html';
+    }
+  },
+  signupSubmit() {
+    this.$refs.signupForm.validate();
+    if (this.signupValid) {
+      // Logic for signup (e.g., send to server)
+      this.showSignup = false;
+      window.location.href = 'blog.html';
+    }
+  }
       },
       template: `
         <v-app>
@@ -130,18 +130,8 @@
                 <v-card-subtitle>Sign in to your account</v-card-subtitle>
                 <v-form v-model="loginValid" ref="loginForm">
                   <v-card-text>
-                    <v-text-field
-                      v-model="loginEmail"
-                      label="Email"
-                      :rules="emailRules"
-                      required
-                    ></v-text-field>
-                    <v-text-field
-                      v-model="loginPassword"
-                      label="Password"
-                      :rules="passwordRules"
-                      type="password"
-                      required
+                    <v-text-field v-model="loginEmail" label="Email":rules="emailRules" required></v-text-field>
+                    <v-text-field v-model="loginPassword"  label="Password":rules="passwordRules" type="password" required
                     ></v-text-field>
                   </v-card-text>
                   <v-card-actions>
