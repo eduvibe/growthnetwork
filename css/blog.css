@@ -1,31 +1,114 @@
-/* Neumorphic Styles */
-.neumorphic {
-    background: #e0e5ec;
-    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
-    border-radius: 15px;
-    transition: all 0.3s ease;
+/* Button Styles */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    outline: none; /* Remove default focus outline */
 }
 
-.neumorphic:hover {
-    box-shadow: 6px 6px 10px rgb(163,177,198,0.6), -6px -6px 10px rgba(255,255,255, 0.5);
+/* Like Button */
+.like-button {
+    color: #888; /* Default grey for unliked state */
+    transition: color 0.3s ease;
 }
 
-/* Dark Mode Styles */
-.dark {
-    background-color: #1a202c;
-    color: #e2e8f0;
+.like-button.liked {
+    color: red; /* Red fill for liked state */
 }
 
-.dark .neumorphic {
-    background: #2d3748;
-    box-shadow: 9px 9px 16px rgba(0,0,0,0.6), -9px -9px 16px rgba(255,255,255,0.1);
+/* Comment Button */
+.comment-button::after {
+    content: '';
+    display: inline-block; /* Changed to inline-block for better alignment */
+    width: 20px;
+    height: 20px;
+    background: url('path/to/comment-icon.svg') no-repeat center center;
+    background-size: 16px;
+    margin-left: 5px;
 }
 
-.dark .neumorphic:hover {
-    box-shadow: 6px 6px 10px rgba(0,0,0,0.6), -6px -6px 10px rgba(255,255,255,0.1);
+/* Share Button */
+.share-button::after {
+    content: '';
+    display: inline-block; /* Changed to inline-block for better alignment */
+    width: 20px;
+    height: 20px;
+    background: url('path/to/share-icon.svg') no-repeat center center;
+    background-size: 16px;
+    margin-left: 5px;
 }
 
-/* Animations */
+/* Comment Area Styles */
+.comment-area {
+    display: none;
+    margin-top: 10px; /* Added margin to separate from other content */
+}
+
+.comment-area textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allows vertical resizing */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.submit-comment {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-comment:hover {
+    background-color: #45a049;
+}
+
+/* Share Options Styles */
+.share-options {
+    display: none;
+}
+
+.share-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.share-option:hover {
+    background-color: #f0f0f0;
+}
+
+.share-option i {
+    margin-right: 8px;
+}
+
+/* Icons for Share Options */
+.share-option .fa-whatsapp { color: #25D366; }
+.share-option .fa-facebook { color: #3b5998; }
+.share-option .fa-twitter { color: #1DA1F2; }
+.share-option .fa-telegram { color: #0088cc; }
+.share-option .fa-copy { color: #000; }
+
+/* General Layout */
+.post-card {
+    margin-bottom: 16px;
+    padding: 16px; /* Added padding for content inside */
+    border-radius: 8px; /* Rounded corners for post card */
+    background: #fff; /* Ensure background color for the card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visual separation */
+}
+
+/* Floating Animation for Elements */
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -34,38 +117,4 @@
 
 .float-animation {
     animation: float 3s ease-in-out infinite;
-}
-
-/* Status Indicators */
-.status-indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.status-indicator.online {
-    background-color: #4CAF50;
-}
-
-.status-indicator.offline {
-    background-color: #F44336;
-}
-
-/* Scrollbar Styles */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
 }
