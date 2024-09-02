@@ -20,40 +20,42 @@
         }
     </script>
     <link rel="stylesheet" href="/css/blog.css">
+    <style>
+        .dark-mode {
+            background-color: #333;
+            color: #eee;
+        }
+        .neumorphic {
+            background: #f7f7f7;
+            border-radius: 12px;
+            box-shadow: 8px 8px 16px rgba(0,0,0,0.2), -8px -8px 16px rgba(255,255,255,0.7);
+        }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-800 transition-colors duration-300">
 
 <header class="bg-white shadow-md p-4 sticky top-0 z-50 transition-colors duration-300">
     <div class="container mx-auto flex justify-between items-center">
-        <!-- Logo and Brand Name -->
         <div class="flex items-center space-x-4">
             <img src="/images/logo.png" alt="Logo" class="h-10 w-10">
             <h1 class="text-3xl font-bold text-primary-color">ThriveLink</h1>
         </div>
-
-        <!-- Mobile Menu Button -->
         <button id="mobileMenuButton" class="text-primary-color md:hidden">
             <i class="fas fa-bars fa-lg"></i>
         </button>
-
-        <!-- Navigation Links -->
         <nav id="mainNav" class="hidden md:flex space-x-6">
             <a href="#home" class="text-primary-color hover:underline text-lg">Home</a>
             <a href="#dashboard" class="text-primary-color hover:underline text-lg">Dashboard</a>
             <a href="#profile" class="text-primary-color hover:underline text-lg">Profile</a>
             <a href="#messages" class="text-primary-color hover:underline text-lg">Messages</a>
         </nav>
-
-        <!-- Dark Mode Toggle -->
         <button id="darkModeToggle" class="neumorphic p-2 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
         </button>
     </div>
-
-    <!-- Mobile Menu -->
-    <nav id="mobileMenu" class="md:hidden bg-white shadow-md">
+    <nav id="mobileMenu" class="md:hidden bg-white shadow-md hidden">
         <div class="flex flex-col p-4">
             <a href="#home" class="text-primary-color hover:underline text-lg py-2">Home</a>
             <a href="#dashboard" class="text-primary-color hover:underline text-lg py-2">Dashboard</a>
@@ -63,73 +65,173 @@
     </nav>
 </header>
 
-<main class="container mx-auto mt-8 grid grid-cols-12 gap-8">
-    <aside class="col-span-12 md:col-span-3">
-        <div class="neumorphic p-6 mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Trending Topics</h2>
-            <ul id="trendingTopics" class="space-y-3">
-                <!-- Trending topics will be dynamically added here -->
-            </ul>
-        </div>
-        <div class="neumorphic p-6">
-            <h2 class="text-2xl font-semibold mb-4">Categories</h2>
-            <div id="categories" class="flex flex-wrap gap-3">
-                <!-- Categories will be dynamically added here -->
+<main class="container mx-auto mt-8">
+    <section id="home" class="neumorphic p-6 mb-8 grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- Left Sidebar -->
+        <aside class="col-span-12 md:col-span-3">
+            <div class="neumorphic p-6 mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Trending Topics</h2>
+                <ul id="trendingTopics" class="space-y-3">
+                    <!-- Trending topics will be dynamically added here -->
+                </ul>
             </div>
-        </div>
-    </aside>
-
-    <section class="col-span-12 md:col-span-6">
-        <!-- Active Members Section -->
-        <div id="activeMembers" class="neumorphic px-4 py-3 mb-8 flex items-center space-x-3 overflow-x-auto">
-            <!-- Active members will be dynamically added here -->
-        </div>
-
-        <!-- User Information and Post Section -->
-        <div class="neumorphic p-6 mb-8">
-            <div class="flex space-x-4 mb-4">
-                <div id="categoryTabs" class="flex space-x-3 overflow-x-auto">
-                    <!-- Category tabs will be dynamically added here -->
+            <div class="neumorphic p-6">
+                <h2 class="text-2xl font-semibold mb-4">Categories</h2>
+                <div id="categories" class="flex flex-wrap gap-3">
+                    <!-- Categories will be dynamically added here -->
                 </div>
             </div>
-            <textarea id="postInput" class="w-full p-4 rounded-lg neumorphic resize-none" rows="3" placeholder="What's on your mind?"></textarea>
+        </aside>
+    
+        <!-- Main Section -->
+        <section class="col-span-12 md:col-span-6">
+            <div id="activeMembers" class="neumorphic px-4 py-3 mb-8 flex items-center space-x-3 overflow-x-auto">
+                <!-- Active members will be dynamically added here -->
+            </div>
+            <div class="neumorphic p-6 mb-8">
+                <div class="flex space-x-4 mb-4">
+                    <div id="categoryTabs" class="flex space-x-3 overflow-x-auto">
+                        <!-- Category tabs will be dynamically added here -->
+                    </div>
+                </div>
+                <textarea id="postInput" class="w-full p-4 rounded-lg neumorphic resize-none" rows="3" placeholder="What's on your mind?"></textarea>
+                <div class="flex items-center space-x-4 mt-4">
+                    <button id="submitPost" class="bg-primary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Post</button>
+                    <label class="flex items-center cursor-pointer">
+                        <i class="fas fa-image text-primary-color text-xl mx-2"></i>
+                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <i class="fas fa-video text-primary-color text-xl mx-2"></i>
+                        <input type="text" id="videoInput" class="hidden" placeholder="Paste video URL">
+                    </label>
+                </div>
+            </div>
+            <div id="posts" class="space-y-8">
+                <!-- Posts will be dynamically added here -->
+            </div>
+            <div id="loadMore" class="text-center mt-8">
+                <button class="bg-secondary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Load More</button>
+            </div>
+        </section>
+    
+        <!-- Right Sidebar -->
+        <aside class="col-span-12 md:col-span-3">
+            <div class="neumorphic p-6">
+                <h2 class="text-2xl font-semibold mb-4">To-Do List</h2>
+                <ul id="todoList" class="space-y-3">
+                    <!-- To-do items will be dynamically added here -->
+                </ul>
+                <div class="mt-4 flex">
+                    <input id="todoInput" type="text" class="w-full p-2 rounded-l-lg neumorphic" placeholder="Add a new task">
+                    <button id="addTodo" class="bg-primary-color text-white px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition duration-300">Add</button>
+                </div>
+            </div>
+        </aside>
+    </section>
+    
 
-            <!-- Post Button and Media Options -->
-            <div class="flex items-center space-x-4 mt-4">
-                <button id="submitPost" class="bg-primary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Post</button>
-                <label class="flex items-center cursor-pointer">
-                    <i class="fas fa-image text-primary-color text-xl mx-2"></i>
-                    <input type="file" id="imageInput" accept="image/*" class="hidden">
-                </label>
-                <label class="flex items-center cursor-pointer">
-                    <i class="fas fa-video text-primary-color text-xl mx-2"></i>
-                    <input type="text" id="videoInput" class="hidden" placeholder="Paste video URL">
-                </label>
+    <section id="dashboard" class="neumorphic p-6 mb-8 hidden">
+        <h2 class="text-2xl font-semibold mb-4">Dashboard Overview</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="neumorphic p-4">
+                <h3 class="text-lg font-semibold mb-2">Active Users</h3>
+                <p class="text-4xl font-bold text-primary-color">125</p>
+            </div>
+            <div class="neumorphic p-4">
+                <h3 class="text-lg font-semibold mb-2">New Posts</h3>
+                <p class="text-4xl font-bold text-primary-color">47</p>
+            </div>
+            <div class="neumorphic p-4">
+                <h3 class="text-lg font-semibold mb-2">Messages Sent</h3>
+                <p class="text-4xl font-bold text-primary-color">302</p>
             </div>
         </div>
-
-        <div id="posts" class="space-y-8">
-            <!-- Posts will be dynamically added here -->
-        </div>
-        <div id="loadMore" class="text-center mt-8">
-            <button class="bg-secondary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Load More</button>
+        <div class="mt-8">
+            <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
+            <ul class="space-y-4">
+                <li class="neumorphic p-3 rounded-lg">User <strong>Alice</strong> posted a new article on Web Development</li>
+                <li class="neumorphic p-3 rounded-lg">User <strong>Bob</strong> joined the AI & ML group</li>
+                <li class="neumorphic p-3 rounded-lg">User <strong>Charlie</strong> commented on your post</li>
+            </ul>
         </div>
     </section>
 
-    <aside class="col-span-12 md:col-span-3">
-        <div class="neumorphic p-6">
-            <h2 class="text-2xl font-semibold mb-4">To-Do List</h2>
-            <ul id="todoList" class="space-y-3">
-                <!-- To-do items will be dynamically added here -->
-            </ul>
-            <div class="mt-4 flex">
-                <input id="todoInput" type="text" class="w-full p-2 rounded-l-lg neumorphic" placeholder="Add a new task">
-                <button id="addTodo" class="bg-primary-color text-white px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition duration-300">Add</button>
+    <section id="profile" class="neumorphic p-6 mb-8 hidden">
+        <h2 class="text-2xl font-semibold mb-4">Profile Overview</h2>
+        <div class="flex items-center space-x-6">
+            <img src="/images/profile-picture.jpg" alt="Profile Picture" class="w-24 h-24 rounded-full shadow-md">
+            <div>
+                <h3 class="text-xl font-semibold">Username</h3>
+                <p class="text-gray-600">Web Developer | Tech Enthusiast</p>
             </div>
         </div>
-    </aside>
+        <div class="mt-8">
+            <h3 class="text-lg font-semibold mb-4">About Me</h3>
+            <p>Welcome to my profile! I am passionate about technology and love learning new things. Feel free to connect with me.</p>
+        </div>
+        <div class="mt-8">
+            <h3 class="text-lg font-semibold mb-4">Recent Activity</h3>
+            <ul class="space-y-4">
+                <li class="neumorphic p-3 rounded-lg">Posted an article about JavaScript frameworks</li>
+                <li class="neumorphic p-3 rounded-lg">Joined the Python community</li>
+                <li class="neumorphic p-3 rounded-lg">Commented on a thread about AI ethics</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="messages" class="neumorphic p-6 mb-8 hidden">
+        <h2 class="text-2xl font-semibold mb-4">Messages</h2>
+        <div id="messagesList" class="space-y-4">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="mt-8 flex">
+            <textarea id="messageInput" class="w-full p-4 rounded-lg neumorphic resize-none" rows="3" placeholder="Type a message..."></textarea>
+            <button id="sendMessage" class="bg-primary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Send</button>
+        </div>
+    </section>
 </main>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('main > section');
+        const navLinks = document.querySelectorAll('nav a, #mobileMenu a');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Show default section (e.g., home) on page load
+        document.getElementById('home').classList.remove('hidden');
+
+        // Function to handle navigation
+        function navigateToSection(event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            sections.forEach(section => section.classList.add('hidden'));
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+            // Hide mobile menu after navigation
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        // Add click event listeners for navigation links
+        navLinks.forEach(link => link.addEventListener('click', navigateToSection));
+
+        // Toggle mobile menu visibility
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    });
+</script>
 <script src="/js/blogapp.js"></script>
 </body>
 </html>

@@ -318,3 +318,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTrendingTopics();
     renderCategories();
 });
+
+

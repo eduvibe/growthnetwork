@@ -436,3 +436,20 @@
         // Initial call to observePosts
         observePosts();
     </script>
+
+
+
+
+Issues:
+Navigation to Sections: The sections like #home, #dashboard, #profile, and #messages are meant to correspond to homePage, dashboardPage, etc. However, the HTML provided does not have an explicit homePage section. The script is trying to target section IDs like homePage, dashboardPage, but these don't align with what's present.
+
+Default Page Load: The script is configured to display the homePage by default, but the homePage section doesn't exist in the main structure.
+
+Toggle Menu: The mobile menu functionality is hidden until triggered, but there’s no event listener to toggle it open.
+
+CSS and Section Layout: The styling is well structured, but each section (home, dashboard, etc.) needs to be properly linked with IDs, and the JavaScript needs to correctly display/hide sections on click.
+
+Adjustments:
+Assign IDs to Sections: Each section should have an ID that corresponds with the navigation links.
+Add Default Home Section: You need to ensure that the homePage section exists for the default view when the page is loaded.
+Mobile Menu Toggle: I'll add an event listener for the mobile menu to toggle its visibility.
