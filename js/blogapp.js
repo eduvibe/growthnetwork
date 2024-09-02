@@ -1,8 +1,4 @@
 
-document.getElementById('mobileMenuButton').addEventListener('click', () => {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('hidden');
-});
 
 
 document.addEventListener('DOMContentLoaded', () => {

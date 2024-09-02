@@ -31,6 +31,7 @@
           signupName: '',
           signupEmail: '',
           signupPassword: '',
+          signupRole: null, // New data property for role
           emailRules: [
             v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
           ],
@@ -40,6 +41,11 @@
           nameRules: [
             v => !!v || 'Name is required'
           ],
+
+          roleOptions: [
+        { value: 'mentor', text: 'Mentor' },
+        { value: 'mentee', text: 'Mentee' }
+      ],
           mentors: [
             { image: '/images/prof2.png', name: 'John Doe', title: 'Senior Developer' },
             { image: '/images/ment1.jpg', name: 'Jane Smith', title: 'UI/UX Designer' },
@@ -69,12 +75,17 @@
     if (this.loginValid) {
       // Logic for login (e.g., send to server)
       this.showLogin = false;
-      window.location.href = 'blog.html';
+      const role = localStorage.getItem('userRole'); // Retrieve the role after login
+          if (role) {
+            window.location.href = 'blog.html';
+          }
     }
   },
   signupSubmit() {
     this.$refs.signupForm.validate();
     if (this.signupValid) {
+       // Save user role in localStorage
+       localStorage.setItem('userRole', this.signupRole);
       // Logic for signup (e.g., send to server)
       this.showSignup = false;
       window.location.href = 'blog.html';
@@ -143,29 +154,33 @@
               </v-card>
             </v-dialog>
 
-            <!-- Signup Modal -->
-            <v-dialog v-model="showSignup" max-width="500px">
-              <v-card>
-                <v-card-title>
-                  <span class="headline">Sign Up</span>
-                </v-card-title>
-                <v-card-subtitle>Create a new account</v-card-subtitle>
-                <v-form v-model="signupValid" ref="signupForm">
-                  <v-card-text>
-                    <v-text-field  v-model="signupName"label="Name":rules="nameRules" required></v-text-field>
-                    <v-text-field v-model="signupEmail" label="Email" :rules="emailRules" required></v-text-field>
-                    <v-text-field  v-model="signupPassword" label="Password" :rules="passwordRules" type="password"
-                      required
-                    ></v-text-field>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn text @click="showSignup = false">Cancel</v-btn>
-                    <v-btn color="primary" @click="signupSubmit">Sign Up</v-btn>
-                  </v-card-actions>
-                </v-form>
-              </v-card>
-            </v-dialog>
+<!-- Signup Modal -->
+<v-dialog v-model="showSignup" max-width="500px">
+  <v-card>
+    <v-card-title>
+      <span class="headline">Sign Up</span>
+    </v-card-title>
+    <v-card-subtitle>Create a new account</v-card-subtitle>
+    <v-form v-model="signupValid" ref="signupForm">
+      <v-card-text>
+        <v-text-field v-model="signupName" label="Name"  :rules="nameRules" required></v-text-field>
+        <v-text-field  v-model="signupEmail"   label="Email" :rules="emailRules" required></v-text-field>
+        <v-text-field  v-model="signupPassword" label="Password" :rules="passwordRules" type="password" required
+        ></v-text-field>
+
+        <!-- Role Selection -->
+        <v-select  v-model="signupRole" :items="roleOptions" label="Role" required item-value="value" item-text="text"
+        ></v-select>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn text @click="showSignup = false">Cancel</v-btn>
+        <v-btn color="primary" @click="signupSubmit">Sign Up</v-btn>
+      </v-card-actions>
+    </v-form>
+  </v-card>
+</v-dialog>
+
 
             <!-- Hero Section -->
             <v-row class="hero">

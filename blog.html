@@ -224,73 +224,87 @@
 </main>
 
 <script>
+    document.getElementById('mobileMenuButton').addEventListener('click', () => {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('hidden');
+});
+
     document.addEventListener('DOMContentLoaded', () => {
+        // Dummy user data from localStorage or fetched from an API
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || { role: 'mentee' }; // Example
+    
         const sections = document.querySelectorAll('main > section');
         const navLinks = document.querySelectorAll('nav a, #mobileMenu a');
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const mobileMenu = document.getElementById('mobileMenu');
-        
-        // Show default section (e.g., home) on page load
+    
+        // Default section (home)
         document.getElementById('home').classList.remove('hidden');
-
-        // Function to handle navigation
+    
+        // Show the correct dashboard based on the user's role
+        const mentorDashboard = document.getElementById('mentorDashboard');
+        const menteeDashboard = document.getElementById('menteeDashboard');
+    
+        if (loggedInUser.role === 'mentor') {
+            document.getElementById('dashboard').classList.remove('hidden');
+            mentorDashboard.classList.remove('hidden');
+        } else if (loggedInUser.role === 'mentee') {
+            document.getElementById('dashboard').classList.remove('hidden');
+            menteeDashboard.classList.remove('hidden');
+        }
+    
+        // Function to handle navigation between sections
         function navigateToSection(event) {
             event.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
+    
             sections.forEach(section => section.classList.add('hidden'));
             const targetSection = document.getElementById(targetId);
+    
             if (targetSection) {
                 targetSection.classList.remove('hidden');
             }
-            // Hide mobile menu after navigation
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
+    
+            // Check if Dashboard is being navigated and ensure the correct dashboard is shown
+            if (targetId === 'dashboard') {
+                if (loggedInUser.role === 'mentor') {
+                    mentorDashboard.classList.remove('hidden');
+                } else if (loggedInUser.role === 'mentee') {
+                    menteeDashboard.classList.remove('hidden');
+                }
             }
         }
-
-        // Add click event listeners for navigation links
-        navLinks.forEach(link => link.addEventListener('click', navigateToSection));
-
+    
+        // Attach click events to nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', navigateToSection);
+        });
+    
         // Toggle mobile menu visibility
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-
-        // Dark mode toggle functionality
+    
+        // Toggle dark mode
         const darkModeToggle = document.getElementById('darkModeToggle');
         darkModeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
         });
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-    const dashboard = document.getElementById('dashboard');
-    const mentorDashboard = document.getElementById('mentorDashboard');
-    const menteeDashboard = document.getElementById('menteeDashboard');
+    // After login or signup:
+const user = {
+    username: 'JohnDoe',
+    role: 'mentor', // or 'mentee'
+    email: 'john@example.com'
+};
+localStorage.setItem('loggedInUser', JSON.stringify(user));
 
-    // Function to display the correct dashboard based on user role
-    function displayDashboard(userRole) {
-        if (userRole === 'mentee') {
-            mentorDashboard.classList.remove('hidden');
-            menteeDashboard.classList.add('hidden');
-        } else if (userRole === 'mentor') {
-            mentorDashboard.classList.add('hidden');
-            menteeDashboard.classList.remove('hidden');
-        } else {
-            mentorDashboard.classList.add('hidden');
-            menteeDashboard.classList.add('hidden');
-        }
-    }
+// During logout, clear the storage
+localStorage.removeItem('loggedInUser');
 
-    // Assume userRole is dynamically determined (e.g., from a login session)
-    const userRole = 'mentor'; // Change to 'mentee' to test the other role
-
-    // Show the dashboard section and the appropriate view
-    dashboard.classList.remove('hidden');
-    displayDashboard(userRole);
-});
-
-</script>
+    </script>
+    
 <script src="/js/blogapp.js"></script>
 </body>
 </html>
