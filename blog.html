@@ -130,32 +130,63 @@
         </aside>
     </section>
     
-
-    <section id="dashboard" class="neumorphic p-6 mb-8 hidden">
-        <h2 class="text-2xl font-semibold mb-4">Dashboard Overview</h2>
+<!-- This is dashboard section -->
+<section id="dashboard" class="neumorphic p-6 mb-8 hidden">
+    <!-- Mentor Dashboard -->
+    <div id="mentorDashboard" class="hidden">
+        <h2 class="text-2xl font-semibold mb-4">Mentor Dashboard Overview</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Active Users</h3>
-                <p class="text-4xl font-bold text-primary-color">125</p>
+                <h3 class="text-lg font-semibold mb-2">Active Mentees</h3>
+                <p class="text-4xl font-bold text-primary-color">30</p>
             </div>
             <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">New Posts</h3>
-                <p class="text-4xl font-bold text-primary-color">47</p>
+                <h3 class="text-lg font-semibold mb-2">Upcoming Sessions</h3>
+                <p class="text-4xl font-bold text-primary-color">12</p>
             </div>
             <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Messages Sent</h3>
-                <p class="text-4xl font-bold text-primary-color">302</p>
+                <h3 class="text-lg font-semibold mb-2">Messages Received</h3>
+                <p class="text-4xl font-bold text-primary-color">45</p>
             </div>
         </div>
         <div class="mt-8">
-            <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
+            <h3 class="text-xl font-semibold mb-4">Recent Mentor Activities</h3>
             <ul class="space-y-4">
-                <li class="neumorphic p-3 rounded-lg">User <strong>Alice</strong> posted a new article on Web Development</li>
-                <li class="neumorphic p-3 rounded-lg">User <strong>Bob</strong> joined the AI & ML group</li>
-                <li class="neumorphic p-3 rounded-lg">User <strong>Charlie</strong> commented on your post</li>
+                <li class="neumorphic p-3 rounded-lg">Mentor <strong>Alice</strong> conducted a workshop on Career Development</li>
+                <li class="neumorphic p-3 rounded-lg">Mentor <strong>Bob</strong> reviewed a mentee's project</li>
+                <li class="neumorphic p-3 rounded-lg">Mentor <strong>Charlie</strong> scheduled a new session</li>
             </ul>
         </div>
-    </section>
+    </div>
+
+    <!-- Mentee Dashboard -->
+    <div id="menteeDashboard" class="hidden">
+        <h2 class="text-2xl font-semibold mb-4">Mentee Dashboard Overview</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="neumorphic p-4">
+                <h3 class="text-lg font-semibold mb-2">Active Sessions</h3>
+                <p class="text-4xl font-bold text-primary-color">10</p>
+            </div>
+            <div class="neumorphic p-4">
+                <h3 class="text-lg font-semibold mb-2">Upcoming Workshops</h3>
+                <p class="text-4xl font-bold text-primary-color">5</p>
+            </div>
+            <div class="neumorphic p-4">
+                <h3 class="text-lg font-semibold mb-2">Messages Sent</h3>
+                <p class="text-4xl font-bold text-primary-color">78</p>
+            </div>
+        </div>
+        <div class="mt-8">
+            <h3 class="text-xl font-semibold mb-4">Recent Mentee Activities</h3>
+            <ul class="space-y-4">
+                <li class="neumorphic p-3 rounded-lg">Mentee <strong>Alice</strong> attended a new workshop</li>
+                <li class="neumorphic p-3 rounded-lg">Mentee <strong>Bob</strong> completed a session with mentor</li>
+                <li class="neumorphic p-3 rounded-lg">Mentee <strong>Charlie</strong> sent feedback on a workshop</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 
     <section id="profile" class="neumorphic p-6 mb-8 hidden">
         <h2 class="text-2xl font-semibold mb-4">Profile Overview</h2>
@@ -231,6 +262,34 @@
             document.body.classList.toggle('dark-mode');
         });
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const dashboard = document.getElementById('dashboard');
+    const mentorDashboard = document.getElementById('mentorDashboard');
+    const menteeDashboard = document.getElementById('menteeDashboard');
+
+    // Function to display the correct dashboard based on user role
+    function displayDashboard(userRole) {
+        if (userRole === 'mentee') {
+            mentorDashboard.classList.remove('hidden');
+            menteeDashboard.classList.add('hidden');
+        } else if (userRole === 'mentor') {
+            mentorDashboard.classList.add('hidden');
+            menteeDashboard.classList.remove('hidden');
+        } else {
+            mentorDashboard.classList.add('hidden');
+            menteeDashboard.classList.add('hidden');
+        }
+    }
+
+    // Assume userRole is dynamically determined (e.g., from a login session)
+    const userRole = 'mentor'; // Change to 'mentee' to test the other role
+
+    // Show the dashboard section and the appropriate view
+    dashboard.classList.remove('hidden');
+    displayDashboard(userRole);
+});
+
 </script>
 <script src="/js/blogapp.js"></script>
 </body>
