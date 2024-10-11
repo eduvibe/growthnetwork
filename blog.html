@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ThriveLink - Connect with mentors and thrive in your field.">
+    <meta property="og:title" content="ThriveLink - Connect and Thrive">
+    <meta property="og:description" content="Join ThriveLink to connect with mentors and mentees and thrive in your field.">
+    <meta property="og:image" content="/images/logo.png">
     <title>ThriveLink - Connect and Thrive</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -20,6 +29,7 @@
         }
     </script>
     <link rel="stylesheet" href="/css/blog.css">
+    <link rel="stylesheet" href="/css/messages.css">
     <style>
         .dark-mode {
             background-color: #333;
@@ -30,26 +40,30 @@
             border-radius: 12px;
             box-shadow: 8px 8px 16px rgba(0,0,0,0.2), -8px -8px 16px rgba(255,255,255,0.7);
         }
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 transition-colors duration-300">
 
-<header class="bg-white shadow-md p-4 sticky top-0 z-50 transition-colors duration-300">
+<header class="bg-white shadow-md p-4 sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center space-x-4">
-            <img src="/images/logo.png" alt="Logo" class="h-10 w-10">
+            <img src="/images/logo.png" alt="ThriveLink Logo" class="h-10 w-10">
             <h1 class="text-3xl font-bold text-primary-color">ThriveLink</h1>
         </div>
-        <button id="mobileMenuButton" class="text-primary-color md:hidden">
+        <button id="mobileMenuButton" class="text-primary-color md:hidden" aria-label="Open mobile menu">
             <i class="fas fa-bars fa-lg"></i>
         </button>
         <nav id="mainNav" class="hidden md:flex space-x-6">
             <a href="#home" class="text-primary-color hover:underline text-lg">Home</a>
-            <a href="#dashboard" class="text-primary-color hover:underline text-lg">Dashboard</a>
+            <a href="mentord.html" class="text-primary-color hover:underline text-lg">Dashboard</a>
             <a href="#profile" class="text-primary-color hover:underline text-lg">Profile</a>
             <a href="#messages" class="text-primary-color hover:underline text-lg">Messages</a>
+            
         </nav>
-        <button id="darkModeToggle" class="neumorphic p-2 rounded-full">
+        <button id="darkModeToggle" class="neumorphic p-2 rounded-full" aria-label="Toggle Dark Mode">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
@@ -58,7 +72,7 @@
     <nav id="mobileMenu" class="md:hidden bg-white shadow-md hidden">
         <div class="flex flex-col p-4">
             <a href="#home" class="text-primary-color hover:underline text-lg py-2">Home</a>
-            <a href="#dashboard" class="text-primary-color hover:underline text-lg py-2">Dashboard</a>
+            <a href="mentord.html" class="text-primary-color hover:underline text-lg py-2">Dashboard</a>
             <a href="#profile" class="text-primary-color hover:underline text-lg py-2">Profile</a>
             <a href="#messages" class="text-primary-color hover:underline text-lg py-2">Messages</a>
         </div>
@@ -67,7 +81,6 @@
 
 <main class="container mx-auto mt-8">
     <section id="home" class="neumorphic p-6 mb-8 grid grid-cols-1 md:grid-cols-12 gap-6">
-        <!-- Left Sidebar -->
         <aside class="col-span-12 md:col-span-3">
             <div class="neumorphic p-6 mb-8">
                 <h2 class="text-2xl font-semibold mb-4">Trending Topics</h2>
@@ -82,8 +95,6 @@
                 </div>
             </div>
         </aside>
-    
-        <!-- Main Section -->
         <section class="col-span-12 md:col-span-6">
             <div id="activeMembers" class="neumorphic px-4 py-3 mb-8 flex items-center space-x-3 overflow-x-auto">
                 <!-- Active members will be dynamically added here -->
@@ -114,8 +125,6 @@
                 <button class="bg-secondary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Load More</button>
             </div>
         </section>
-    
-        <!-- Right Sidebar -->
         <aside class="col-span-12 md:col-span-3">
             <div class="neumorphic p-6">
                 <h2 class="text-2xl font-semibold mb-4">To-Do List</h2>
@@ -129,65 +138,6 @@
             </div>
         </aside>
     </section>
-    
-<!-- This is dashboard section -->
-<section id="dashboard" class="neumorphic p-6 mb-8 hidden">
-    <!-- Mentor Dashboard -->
-    <div id="mentorDashboard" class="hidden">
-        <h2 class="text-2xl font-semibold mb-4">Mentor Dashboard Overview</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Active Mentees</h3>
-                <p class="text-4xl font-bold text-primary-color">30</p>
-            </div>
-            <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Upcoming Sessions</h3>
-                <p class="text-4xl font-bold text-primary-color">12</p>
-            </div>
-            <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Messages Received</h3>
-                <p class="text-4xl font-bold text-primary-color">45</p>
-            </div>
-        </div>
-        <div class="mt-8">
-            <h3 class="text-xl font-semibold mb-4">Recent Mentor Activities</h3>
-            <ul class="space-y-4">
-                <li class="neumorphic p-3 rounded-lg">Mentor <strong>Alice</strong> conducted a workshop on Career Development</li>
-                <li class="neumorphic p-3 rounded-lg">Mentor <strong>Bob</strong> reviewed a mentee's project</li>
-                <li class="neumorphic p-3 rounded-lg">Mentor <strong>Charlie</strong> scheduled a new session</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Mentee Dashboard -->
-    <div id="menteeDashboard" class="hidden">
-        <h2 class="text-2xl font-semibold mb-4">Mentee Dashboard Overview</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Active Sessions</h3>
-                <p class="text-4xl font-bold text-primary-color">10</p>
-            </div>
-            <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Upcoming Workshops</h3>
-                <p class="text-4xl font-bold text-primary-color">5</p>
-            </div>
-            <div class="neumorphic p-4">
-                <h3 class="text-lg font-semibold mb-2">Messages Sent</h3>
-                <p class="text-4xl font-bold text-primary-color">78</p>
-            </div>
-        </div>
-        <div class="mt-8">
-            <h3 class="text-xl font-semibold mb-4">Recent Mentee Activities</h3>
-            <ul class="space-y-4">
-                <li class="neumorphic p-3 rounded-lg">Mentee <strong>Alice</strong> attended a new workshop</li>
-                <li class="neumorphic p-3 rounded-lg">Mentee <strong>Bob</strong> completed a session with mentor</li>
-                <li class="neumorphic p-3 rounded-lg">Mentee <strong>Charlie</strong> sent feedback on a workshop</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-
     <section id="profile" class="neumorphic p-6 mb-8 hidden">
         <h2 class="text-2xl font-semibold mb-4">Profile Overview</h2>
         <div class="flex items-center space-x-6">
@@ -210,97 +160,103 @@
             </ul>
         </div>
     </section>
-
-    <section id="messages" class="neumorphic p-6 mb-8 hidden">
-        <h2 class="text-2xl font-semibold mb-4">Messages</h2>
-        <div id="messagesList" class="space-y-4">
-            <!-- Messages will be dynamically added here -->
-        </div>
-        <div class="mt-8 flex">
-            <textarea id="messageInput" class="w-full p-4 rounded-lg neumorphic resize-none" rows="3" placeholder="Type a message..."></textarea>
-            <button id="sendMessage" class="bg-primary-color text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Send</button>
-        </div>
+    <!-- Message section  -->
+    <section id="messages" class="flex-grow flex">
+        <!-- Left Sidebar -->
+        <aside class="w-1/4 bg-white p-4 overflow-y-auto neumorphic">
+            <div class="mb-4">
+                <input type="text" id="searchFriends" placeholder="Search friends..." class="w-full p-2 rounded-full neumorphic-inset">
+            </div>
+            <ul id="friendsList" class="space-y-2">
+                <li class="friend-item" data-id="1">
+                    <span class="friend-name">Alice</span>
+                </li>
+                <li class="friend-item" data-id="2">
+                    <span class="friend-name">Bob</span>
+                </li>
+                <!-- Add more friends as needed -->
+            </ul>
+        </aside>
+    
+        <!-- Main Content Area -->
+        <main class="w-1/2 flex flex-col bg-gray-50 neumorphic">
+            <div id="chatHeader" class="bg-white p-4 flex items-center border-b neumorphic">
+                <img id="chatAvatar" src="https://picsum.photos/40/40?random=3" alt="Chat Avatar" class="w-10 h-10 rounded-full mr-2">
+                <h2 id="chatName" class="text-xl font-semibold">Select a chat</h2>
+            </div>
+            <div id="chatMessages" class="flex-grow p-4 overflow-y-auto space-y-4">
+                <!-- Chat messages will be populated here -->
+            </div>
+            <div class="p-4 bg-white border-t neumorphic">
+                <div class="flex items-center">
+                    <input type="text" id="messageInput" placeholder="Type your message..." class="flex-grow p-2 rounded-l-full neumorphic-inset">
+                    <button id="sendMessage" class="bg-orange-500 text-white p-2 rounded-r-full hover:bg-orange-600 transition duration-300 neumorphic">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    
+        <!-- Right Sidebar -->
+        <aside id="userProfileSidebar" class="w-1/4 bg-white p-4 neumorphic">
+            <!-- User profile details will be updated here -->
+            <div id="userProfile" class="text-center">
+                <img id="userProfilePic" src="https://picsum.photos/100/100?random=2" alt="User Profile" class="w-24 h-24 rounded-full mx-auto mb-4">
+                <h2 id="userProfileName" class="text-xl font-semibold mb-2">John Doe</h2>
+                <p id="userProfileStatus" class="text-gray-600">Online</p>
+            </div>
+        </aside>
     </section>
-</main>
+    
+    
+
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Get elements
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const navLinks = document.querySelectorAll('nav a, #mobileMenu a');
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const sections = document.querySelectorAll('main > section');
+   document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.querySelectorAll('nav a, #mobileMenu a');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const sections = document.querySelectorAll('main > section');
 
-        // Handle mobile menu toggle
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+    function navigateToSection(event) {
+        event.preventDefault();
+        const targetHref = this.getAttribute('href');
 
-        // Handle navigation between sections
-        function navigateToSection(event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-
+        // Check if the link is to an external page
+        if (targetHref.endsWith('.html')) {
+            window.location.href = targetHref;
+        } else {
+            // Internal navigation
+            const targetId = targetHref.substring(1); // Remove the #
             sections.forEach(section => section.classList.add('hidden'));
             const targetSection = document.getElementById(targetId);
 
             if (targetSection) {
                 targetSection.classList.remove('hidden');
             }
-
-            // Check if Dashboard is being navigated and ensure the correct dashboard is shown
-            if (targetId === 'dashboard') {
-                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || { role: 'mentee' };
-                const mentorDashboard = document.getElementById('mentorDashboard');
-                const menteeDashboard = document.getElementById('menteeDashboard');
-
-                if (loggedInUser.role === 'mentor') {
-                    mentorDashboard.classList.remove('hidden');
-                    menteeDashboard.classList.add('hidden');
-                } else if (loggedInUser.role === 'mentee') {
-                    menteeDashboard.classList.remove('hidden');
-                    mentorDashboard.classList.add('hidden');
-                }
-            }
-
-            // Hide mobile menu after navigation
-            if (mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            } else {
-                mobileMenu.classList.add('hidden');
-            }
         }
 
-        // Attach click events to nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', navigateToSection);
-        });
+        // Hide mobile menu after navigation
+        mobileMenu.classList.add('hidden');
+    }
 
-        // Toggle dark mode
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
-
-        // Initialize sections visibility
-        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || { role: 'mentee' };
-        const mentorDashboard = document.getElementById('mentorDashboard');
-        const menteeDashboard = document.getElementById('menteeDashboard');
-
-        if (loggedInUser.role === 'mentor') {
-            document.getElementById('dashboard').classList.remove('hidden');
-            mentorDashboard.classList.remove('hidden');
-        } else if (loggedInUser.role === 'mentee') {
-            document.getElementById('dashboard').classList.remove('hidden');
-            menteeDashboard.classList.remove('hidden');
-        }
-
-        // Ensure the home section is visible by default
-        document.getElementById('home').classList.remove('hidden');
+    // Attach click events to nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', navigateToSection);
     });
+
+    // Toggle dark mode
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
+
+    // Ensure the home section is visible by default
+    document.getElementById('home').classList.remove('hidden');
+});
 </script>
 
-    
 <script src="/js/blogapp.js"></script>
+<script src="/js/message.js"></script>
 </body>
 </html>

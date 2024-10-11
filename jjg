@@ -453,3 +453,28 @@ Adjustments:
 Assign IDs to Sections: Each section should have an ID that corresponds with the navigation links.
 Add Default Home Section: You need to ensure that the homePage section exists for the default view when the page is loaded.
 Mobile Menu Toggle: I'll add an event listener for the mobile menu to toggle its visibility.
+
+
+
+
+CLS
+
+INPUT "Enter any string: ", S$
+
+' Initialize W$ as an empty string
+W$ = ""
+
+' Loop to reverse the string
+FOR l = LEN(S$) TO 1 STEP -1
+    B$ = MID$(S$, l, 1)
+    W$ = W$ + B$
+NEXT l
+
+' Compare the original string with the reversed string
+IF S$ = W$ THEN
+    PRINT "It is a palindrome"
+ELSE
+    PRINT "It is not a palindrome"
+END IF
+
+END

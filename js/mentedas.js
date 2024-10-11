@@ -237,3 +237,30 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
     init();
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const notificationIcon = document.querySelector('.notification-icon');
+    const notificationDropdown = document.querySelector('.notification-dropdown');
+
+    // Toggle mobile menu
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Toggle dark mode
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const icon = darkModeToggle.querySelector('i');
+        icon.classList.toggle('fa-moon');
+        icon.classList.toggle('fa-sun');
+    });
+
+    // Toggle notification dropdown
+    notificationIcon.addEventListener('click', () => {
+        notificationDropdown.classList.toggle('hidden');
+    });
+});
